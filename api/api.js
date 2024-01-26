@@ -1,4 +1,6 @@
 import axios from "axios";
+require('dotenv').config();
+const apiKey = process.env.API_KEY;
 const API_BASE_URL = "https://my-blog-beta-green.vercel.app"
 export const createUser = async (userData) => {
   try {
@@ -6,6 +8,7 @@ export const createUser = async (userData) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "API_KEY" : apiKey
       },
       body: JSON.stringify(userData),
     });
@@ -31,6 +34,7 @@ export const Login = async (checkUser) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "API_KEY" : apiKey
       },
       body: JSON.stringify(checkUser),
     });
@@ -68,6 +72,7 @@ export const checkUserExist = async (email) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "API_KEY" : apiKey
       },
       body: JSON.stringify({ userEmail: email })
     });
@@ -101,6 +106,7 @@ export const createPost = async (postData) => {
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": true,
+        "API_KEY" : apiKey
       },
       body: JSON.stringify(postData),
     });
@@ -116,7 +122,11 @@ export const createPost = async (postData) => {
 
 export const getUser = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/users`);
+    const response = await fetch(`${API_BASE_URL}/users`, {
+      headers: {
+        "API_KEY" : apiKey
+      }
+    });
     return await response.json();
   } catch (error) {
     console.error("Error getting users:", error);
@@ -126,7 +136,11 @@ export const getUser = async () => {
 export const getModifiedUser = async (userId) => {
   if(userId){
     try {
-      const response = await axios.get(`${API_BASE_URL}/modifieduser/${userId}`);
+      const response = await axios.get(`${API_BASE_URL}/modifieduser/${userId}`, {
+        headers: {
+          "API_KEY" : apiKey
+        }
+      });
       return await response.data
     } catch (error) {
       console.error(`Error getting user with ID ${userId}:`, error);
@@ -137,7 +151,11 @@ export const getModifiedUser = async (userId) => {
 export const getSpecificPost = async (postId) => {
   if(postId){
     try {
-      const response = await axios.get(`${API_BASE_URL}/posts/${postId}`);
+      const response = await axios.get(`${API_BASE_URL}/posts/${postId}`, {
+        headers: {
+          "API_KEY" : apiKey
+        }
+      });
       return await response.data
     } catch (error) {
       console.error(`Error getting post with ID ${postId}:`, error);
@@ -147,7 +165,11 @@ export const getSpecificPost = async (postId) => {
 
 export const getPost = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/posts`);
+    const response = await fetch(`${API_BASE_URL}/posts`, {
+      headers: {
+        "API_KEY" : apiKey
+      }
+    });
     return await response.json();
   } catch (error) {
     console.error("Error getting posts:", error);
@@ -160,6 +182,7 @@ export const updateUser = async (requestData,userId) => {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
+        "API_KEY" : apiKey
       },
       body: JSON.stringify(requestData),
     });
