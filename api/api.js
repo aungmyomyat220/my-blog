@@ -1,9 +1,6 @@
 import axios from "axios";
-
 const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-console.log(`API Base URL: ${apiKey}`);
-console.log(`API Key: ${API_BASE_URL}`);
 export const createUser = async (userData) => {
   try {
     const response = await fetch(`${API_BASE_URL}/users`, {
@@ -166,7 +163,6 @@ export const getSpecificPost = async (postId) => {
 };
 
 export const getPost = async () => {
-  console.log("work")
   try {
     const response = await fetch(`${API_BASE_URL}/posts`, {
       headers: {
