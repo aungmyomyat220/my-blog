@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const apiKey = process.env.API_KEY;
-const API_BASE_URL = process.env.API_BASE_URL;
+const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 console.log(`API Base URL: ${apiKey}`);
 console.log(`API Key: ${API_BASE_URL}`);
 export const createUser = async (userData) => {
