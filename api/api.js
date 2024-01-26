@@ -1,5 +1,5 @@
 import axios from "axios";
-require('dotenv').config();
+// require('dotenv').config({ path: '../.env' });
 const apiKey = process.env.API_KEY;
 const API_BASE_URL = process.env.API_BASE_URL;
 export const createUser = async (userData) => {
@@ -164,6 +164,7 @@ export const getSpecificPost = async (postId) => {
 };
 
 export const getPost = async () => {
+  console.log("work")
   try {
     const response = await fetch(`${API_BASE_URL}/posts`, {
       headers: {
