@@ -1,7 +1,7 @@
 "use client";
 import React, {useState} from "react";
 import emailjs from "emailjs-com";
-import {checkUserExist, updateUser} from "../../api";
+import {checkUserExist, updateUser} from "../../../../api/api";
 import Swal from "sweetalert2";
 import {useRouter} from "next/navigation";
 
