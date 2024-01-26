@@ -1,33 +1,346 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* Selector */
+::selection {
+    background: greenyellow;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+/* SearchBox */
+.container-input {
+    position: relative;
+  }
+  
+  .input {
+    width: 150px;
+    padding: 10px 0px 10px 40px;
+    border-radius: 9999px;
+    border: solid 1px #333;
+    transition: all .2s ease-in-out;
+    outline: none;
+    opacity: 0.8;
+  }
+  
+  .container-input svg {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translate(0, -50%);
+  }
+  
+  .input:focus {
+    opacity: 1;
+    width: 250px;
+  }
+
+
+/* Noti Icon */
+/*------ Settings ------*/
+.container {
+  --color: #a5a5b0;
+  --size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  font-size: var(--size);
+  user-select: none;
+  fill: var(--color);
+}
+
+.container .bell-regular {
+  position: absolute;
+  animation: keyframes-fill .5s;
+}
+
+.container .bell-solid {
+  position: absolute;
+  display: none;
+  animation: keyframes-fill .5s;
+}
+
+/* ------ On check event ------ */
+.container input:checked ~ .bell-regular {
+  display: none;
+}
+
+.container input:checked ~ .bell-solid {
+  display: block;
+}
+
+/* ------ Hide the default checkbox ------ */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* ------ Animation ------ */
+@keyframes keyframes-fill {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    transform: rotate(25deg);
+  }
+
+  50% {
+    transform: rotate(-20deg) scale(1.2);
+  }
+
+  75% {
+    transform: rotate(15deg);
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* Loading */
+.button {
+  width: 45px;
+  height: 45px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(44, 44, 44);
+  border-radius: 50%;
+  cursor: pointer;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.13);
+  border: none;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+.bell {
+  width: 17px;
+}
+
+.bell path {
+  fill: white;
+}
+
+.button:hover {
+  background-color: rgb(56, 56, 56);
+}
+
+.button:hover .bell {
+  animation: bellRing 0.9s both;
+}
+
+/* bell ringing animation keyframes*/
+@keyframes bellRing {
+  0%,
+  100% {
+    transform-origin: top;
+  }
+
+  15% {
+    transform: rotateZ(10deg);
+  }
+
+  30% {
+    transform: rotateZ(-10deg);
+  }
+
+  45% {
+    transform: rotateZ(5deg);
+  }
+
+  60% {
+    transform: rotateZ(-5deg);
+  }
+
+  75% {
+    transform: rotateZ(2deg);
   }
 }
+
+.button:active {
+  transform: scale(0.8);
+}
+
+
+/* Animation delay for each cube */
+.cube1 {
+  animation-delay: 0.3s;
+}
+.cube2 {
+  animation-delay: 0.6s;
+}
+.cube3 {
+  animation-delay: 0.9s;
+}
+.cube4 {
+  animation-delay: 1.2s;
+}
+
+/*Hide ScrollBar*/
+.no-scrollbar{
+  overflow-y: auto;
+  height: 520px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Follow Button */
+.tooltip-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.3s;
+  background-color: rgb(255, 255, 255);
+  padding: 11px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  border: 1px solid rgb(211, 211, 211);
+  width: fit-content
+}
+
+.text {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+}
+.svgIcon {
+  width: 16px;
+  height: auto;
+}
+.tooltip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.3em 0.6em;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  background-color: rgb(255, 255, 255);
+  border-radius: 12px;
+  color: rgb(34, 34, 34);
+}
+
+.tooltip::before {
+  position: absolute;
+  content: "";
+  height: 0.6em;
+  width: 0.6em;
+  bottom: -0.2em;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  background-color: rgb(255, 255, 255);
+}
+
+.tooltip-container:hover .tooltip {
+  top: -100%;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Noti */
+#inbox-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.082);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: #464646;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+#inbox-btn svg path {
+  fill: white;
+}
+#inbox-btn svg {
+  height: 17px;
+  transition: all 0.3s;
+}
+.msg-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  font-size: 0.7em;
+  color: rgb(0, 0, 0);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#inbox-btn:hover {
+  transform: scale(1.1);
+}
+
+/*Send Button*/
+#send-btn {
+  background: royalblue;
+  color: white;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+#send-btn span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+#send-btn svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+#send-btn:hover .svg-wrapper {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+#send-btn:hover svg {
+  transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+#send-btn:hover span {
+  transform: translateX(5em);
+}
+
+#send-btn:active {
+  transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+  from {
+    transform: translateY(0.1em);
+  }
+
+  to {
+    transform: translateY(-0.1em);
+  }
+}
+
+
+
