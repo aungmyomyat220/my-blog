@@ -2,6 +2,8 @@ import axios from "axios";
 // require('dotenv').config({ path: '../.env' });
 const apiKey = process.env.API_KEY;
 const API_BASE_URL = process.env.API_BASE_URL;
+console.log(`API Base URL: ${apiKey}`);
+console.log(`API Key: ${API_BASE_URL}`);
 export const createUser = async (userData) => {
   try {
     const response = await fetch(`${API_BASE_URL}/users`, {
