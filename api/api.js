@@ -175,7 +175,8 @@ export const getPost = async () => {
   }
 };
 
-export const updateUser = async ({Id,updateData}) => {
+export const updateUser = async (param) => {
+  const {Id,updateData} = param
   try {
     const response = await fetch(`${API_BASE_URL}/users/${Id}`, {
       method: 'PUT',
