@@ -9,7 +9,7 @@ emailjs.init("IxTBYliB_BO-f_J1-");
 const Page = () => {
   const router = useRouter()
   const [email, setEmail] = useState("");
-  const [userId, setUserId] = useState("");
+  const [Id, setUserId] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
@@ -50,7 +50,6 @@ const Page = () => {
         .then((response) => {
           setIsSuccess(true);
           setShow(true);
-          console.log("Email sent successfully:", response);
           setTimeout(() => {
             setRandomNumber("");
           }, 60000);
@@ -77,15 +76,9 @@ const Page = () => {
       setLetChangePassword(true);
     } else if (newPassword === confirmPassword) {
       setLetChangePassword(false);
-      const updateCategory = "password";
       const updateData = newPassword
-      const requestData = {
-        updateData,
-        updateCategory
-      };
-
       try {
-        const result = await updateUser(requestData, userId);
+        const result = await updateUser(Id,updateData);
         if(result.statusCode === 200){
           await Swal.fire({
             icon: "success",
