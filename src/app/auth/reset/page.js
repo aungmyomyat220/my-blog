@@ -4,10 +4,12 @@ import emailjs from "emailjs-com";
 import {checkUserExist, updateUser} from "../../../../api/api";
 import Swal from "sweetalert2";
 import {useRouter} from "next/navigation";
+import {updateUserHook} from "../../../../hooks/updateUserHook";
 
 emailjs.init("IxTBYliB_BO-f_J1-");
 const Page = () => {
   const router = useRouter()
+  const {mutateAsync : resetPassword} = updateUserHook()
   const [email, setEmail] = useState("");
   const [Id, setUserId] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -76,10 +78,12 @@ const Page = () => {
       setLetChangePassword(true);
     } else if (newPassword === confirmPassword) {
       setLetChangePassword(false);
-      const updateData = newPassword
+      const updateData = {
+        password : newPassword
+      }
       try {
-        const result = await updateUser(Id,updateData);
-        if(result.statusCode === 200){
+        const result = await resetPassword({Id,updateData})
+        if(result.status === 200){
           await Swal.fire({
             icon: "success",
             title: "Success",
