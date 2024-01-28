@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { getAllUsersHook } from "../../../../hooks/getAllUsersHook";
 import Image from "next/image";
-import {getModifiedUsersHook} from "../../../../hooks/getModifiedUser";
+import {getModifiedUsersHook} from "../../../../hooks/getModifiedUserHook";
 import {updateUserHook} from "../../../../hooks/updateUserHook";
 
 const Sidebar = () => {

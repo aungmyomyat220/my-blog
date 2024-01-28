@@ -1,5 +1,5 @@
 import { useParams } from "next/navigation";
-import { getModifiedUsersHook } from "../../../../hooks/getModifiedUser";
+import { getModifiedUsersHook } from "../../../../hooks/getModifiedUserHook";
 import Work from "../../../image/suitcase.png";
 import Experience from "../../../image/quality.png";
 import Programming from "../../../image/coding.png";
