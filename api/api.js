@@ -175,15 +175,15 @@ export const getPost = async () => {
   }
 };
 
-export const updateUser = async (requestData,userId) => {
+export const updateUser = async ({Id,updateData}) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
-      method: 'PATCH',
+    const response = await fetch(`${API_BASE_URL}/users/${Id}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         "API_KEY" : apiKey
       },
-      body: JSON.stringify(requestData),
+      body: JSON.stringify(updateData),
     });
 
     if (!response.ok) {
