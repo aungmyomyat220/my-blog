@@ -8,7 +8,7 @@ export const updateUserHook = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     return useMutation(
       async ({Id,updateData}) => {
-          return await axios.put(`${API_BASE_URL}/${Id}`, updateData,{
+          return await axios.put(`${API_BASE_URL}/users/${Id}`, updateData,{
             headers: {
               "API_KEY" : apiKey
             }

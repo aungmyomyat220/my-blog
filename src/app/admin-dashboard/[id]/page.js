@@ -72,6 +72,10 @@ const Page = () => {
     setPostData((prevPostData) => ({
       ...prevPostData,
       [name]: value,
+      author: user.userName,
+      authorId: user._id,
+      authorImage : user.image,
+      date: new Date(),
     }));
   };
 

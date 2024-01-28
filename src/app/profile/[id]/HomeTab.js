@@ -21,11 +21,11 @@ const HomeTab = ({searchKey,searchMode}) => {
     if (userData) {
       setUser(JSON.parse(userData));
     }
-  }, [posts]);
+  }, []);
 
   const filterPosts = useMemo(() => {
     return posts.filter((post) => !post.delFlag && post.authorId === id && post.title.toLowerCase().includes(searchKey.toLowerCase()));
-  }, [posts, searchKey,user]);
+  }, [posts]);
 
   const now = new Date();
   const postsWithTimeDifferences = filterPosts.map(post => ({
