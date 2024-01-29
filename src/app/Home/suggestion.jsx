@@ -8,6 +8,7 @@ import {getAllUsersHook} from "../../../hooks/getAllUsersHook"
 import {updateUserHook} from '../../../hooks/updateUserHook'
 import {getModifiedUsersHook} from "../../../hooks/getModifiedUserHook";
 import Swal from 'sweetalert2'
+import { fi } from 'date-fns/locale'
 
 const Suggestion = () => {
   const { data: users = [] } = getAllUsersHook()
@@ -41,16 +42,15 @@ const Suggestion = () => {
   const followerList = users.filter(
       (filterUser) => filterUser._id === user._id
   );
-  const filteredUsers = users.filter(
+  let filteredUsers = users.filter(
     (filterUser) => filterUser._id !== user._id && !followerList[0]?.followers.includes(filterUser._id)
   );
 
-  useEffect(() => {
-    if(filteredUsers.length>3){
-      const res = filteredUsers.slice(0, 3)
-      setFirstFourUser(res)
-    }
-  }, [data]);
+  if(filteredUsers.length > 1){
+    const res = filteredUsers.slice(0,1)
+    filteredUsers = {}
+    filteredUsers = res
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -173,6 +173,9 @@ const Suggestion = () => {
             </div>
           );
         })
+        }
+        {seeAllUser &&
+          <span className={'hover:underline text-blue-500 cursor-pointer'}>see all ({filteredUsers.length})</span>
         }
       </div>
     </div>
