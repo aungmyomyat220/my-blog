@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import {getAllUsersHook} from "../../../hooks/getAllUsersHook"
 import {updateUserHook} from '../../../hooks/updateUserHook'
 import {getModifiedUsersHook} from "../../../hooks/getModifiedUserHook";
+import Swal from 'sweetalert2'
 
 const Suggestion = () => {
   const { data: users = [] } = getAllUsersHook()
@@ -17,10 +18,12 @@ const Suggestion = () => {
   const [follower, setFollower] = useState([]);
   const router = useRouter();
   const [user, setUser] = useState({});
+  const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
     const userData = sessionStorage["user"];
     if (userData) {
+      setIsAuth(true)
       setUser(JSON.parse(userData));
     }
   }, []);
@@ -64,7 +67,6 @@ const Suggestion = () => {
   }, []);
 
   const follow =  (followUserId) => {
-    const updateCategory = "followers"
     const Id = user._id;
     try {
       setFollower((prevFollower) => {
@@ -79,6 +81,24 @@ const Suggestion = () => {
       console.error('Error in follow function:', error);
     }
   };
+
+  const viewPost = async (Id) => {
+    if(!isAuth){
+      await Swal.fire({
+        icon: "warning",
+        title: "Attention",
+        text: "You need to login first",
+        showConfirmButton: true,
+        timer: null,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push('auth/signIn');
+        }
+      })}
+    else if(isAuth){
+      router.push(`/posts/${Id}`);
+    }
+  }
 
   return (
     <div>
@@ -103,7 +123,7 @@ const Suggestion = () => {
                 {post.author}
               </span>
             </div>
-            <span className="text-md font-bold mt-1 cursor-pointer" onClick={()=>{router.push(`/posts/${post._id}`)}}>
+            <span className="text-md font-bold mt-1 cursor-pointer" onClick={()=>viewPost(post._id)}>
               {post.title}
             </span>
           </div>
