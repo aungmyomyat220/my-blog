@@ -8,12 +8,20 @@ import Linkedin from "../../../image/linkedin-logo.png";
 import Github from "../../../image/github.png";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { updateUserHook } from '../../../../hooks/updateUserHook'
 
 const AboutTab = () => {
   const { id } = useParams();
   const [viewerMode, setViewerMode] = useState(false);
   const [showUserData, setShowUserData] = useState(false);
   const [user, setUser] = useState({});
+  const [showInputBox, setShowUserInputBox] = useState(false);
+  const {mutateAsync:updateUserBio} = updateUserHook()
+  const [userBio,setUserBio] = useState({
+    companyName : "",
+    mainLanguage : "",
+    experience : ""
+  })
 
   useEffect(() => {
     const userData = sessionStorage["user"];
@@ -27,7 +35,7 @@ const AboutTab = () => {
     }
   }, [viewerMode]);
 
-  const { data: viewerUser, isLoading, error } = getModifiedUsersHook(id);
+  const { data: viewerUser, isLoading} = getModifiedUsersHook(id);
   useEffect(() => {
     if (!isLoading) {
       if (viewerUser.userBio.experience) {
@@ -35,6 +43,22 @@ const AboutTab = () => {
       }
     }
   }, [viewerUser,isLoading]);
+
+  const handleChange = (e) => {
+    const {name,value} = e.target
+    setUserBio(prevBio=>({
+      ...prevBio,
+        [name] : value
+    }))
+  }
+
+  const updateBio = async() =>{
+    const Id = user._id;
+    const updateData = {
+      userBio : userBio
+    }
+    await updateUserBio({Id,updateData})
+  }
 
   return (
     <>
@@ -121,9 +145,7 @@ const AboutTab = () => {
             </div>
           ) : (
             <div className="bg-gray-200 h-80 flex flex-col justify-center items-center px-20 mt-14">
-              {/* eslint-disable-next-line react/no-unescaped-entities */}
               <span className="font-bold text-xl">
-                {/* eslint-disable-next-line react/no-unescaped-entities */}
                 User doesn't update Bio yet
               </span>
             </div>
@@ -210,20 +232,43 @@ const AboutTab = () => {
                 </div>
               </div>
             ) : (
-              <div className="bg-gray-200 h-80 flex flex-col justify-center items-center px-20 mt-14">
+              <>
+                {
+                  showInputBox ?
+                    <div className="bg-gray-200 h-80 flex flex-col justify-center items-center px-20 mt-14">
+
+                      <div className={'grid grid-cols-2 mb-5'}>
+                        <span>Company Name</span>
+                        <input type='text' className={'py-1 border border-black px-3'} name="companyName" onChange={handleChange}/>
+                      </div>
+                      <div className={'grid grid-cols-2 mb-5'}>
+                        <span>Main language</span>
+                        <input type={'text'} className={'py-1 border border-black px-3'} name='mainLanguage' onChange={handleChange}/>
+                      </div>
+                      <div className={'grid grid-cols-2 mb-10'}>
+                        <span>Experience</span>
+                        <input type={'text'} className={'py-1 border border-black px-3'} name='experience' onChange={handleChange}/>
+                      </div>
+                      <button className={'px-5 py-1 bg-blue-500 text-white rounded-lg'} onClick={updateBio}>Update</button>
+                    </div>
+                    :
+                    <div className="bg-gray-200 h-80 flex flex-col justify-center items-center px-20 mt-14">
                 <span className="font-bold text-xl">
                   Tell the world about yourself
                 </span>
-                <span className="px-28 text-center my-5">
+                      <span className="px-28 text-center my-5">
                   Here’s where you can share more about yourself: your history,
                   work experience, accomplishments, interests, dreams, and more.
                   You can even add images and use rich text to personalize your
                   bio.
                 </span>
-                <button className="border border-black px-4 py-1 rounded-full hover:bg-black hover:text-white">
-                  Get Started
-                </button>
-              </div>
+                      <button className="border border-black px-4 py-1 rounded-full hover:bg-black hover:text-white"
+                              onClick={() => setShowUserInputBox(true)}>
+                        Get Started
+                      </button>
+                    </div>
+                }
+              </>
             )}
           </>
         )}
