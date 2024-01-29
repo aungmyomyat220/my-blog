@@ -55,7 +55,7 @@ const Suggestion = () => {
     if(filteredUsers.length < 3){
       setAllUser(filteredUsers)
     }
-  }, [followerList]);
+  }, [filteredUsers.length]);
 
   useEffect(() => {
     const fetchData = async () => {
