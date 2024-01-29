@@ -74,7 +74,9 @@ const Suggestion = () => {
         const updateData = {
           followers : updated
         };
-        mutateAsync({ Id, updateData });
+        if(isAuth){
+          mutateAsync({ Id, updateData });
+        }
         return updated
       });
     } catch (error) {
