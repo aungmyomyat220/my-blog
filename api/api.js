@@ -1,8 +1,6 @@
 import axios from "axios";
-// const apiKey = process.env.NEXT_PUBLIC_API_KEY;
-// const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-const apiKey = "927e0f9a-4451-4210-8dd1-eb47f8ca9089";
-const API_BASE_URL = "https://my-blog-beta-green.vercel.app";
+const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 export const createUser = async (userData) => {
   try {
     const response = await fetch(`${API_BASE_URL}/users`, {

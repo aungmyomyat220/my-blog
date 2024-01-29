@@ -3,7 +3,8 @@ import ViewComment from "@/app/posts/[id]/ViewComment";
 import {updatePostHook} from "../../../../hooks/updatePostHook";
 
 const CommentSection = (props) => {
-  const {mutateAsync} = updatePostHook()
+  const {mutateAsync,isLoading} = updatePostHook()
+  console.log("Loading",isLoading)
   const { post } = props;
   const [commentContent, setCommentContent] = useState("");
   const [user, setUser] = useState({});
@@ -58,6 +59,9 @@ const CommentSection = (props) => {
             <button className={"mr-3 px-3 py-1"} onClick={commentClear}>Cancel</button>
           </span>
           <span>
+            {isLoading ?
+              "Loading" :
+
             <button id="send-btn" onClick={sendComment}>
               <div className="svg-wrapper-1">
                 <div className="svg-wrapper">
@@ -76,7 +80,7 @@ const CommentSection = (props) => {
                 </div>
               </div>
               <span>Send</span>
-            </button>
+            </button>}
           </span>
         </div>
         <ViewComment updatedPost={post}></ViewComment>
