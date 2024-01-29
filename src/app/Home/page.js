@@ -9,6 +9,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState("foryou");
   const [searchMode,setSearchMode] = useState(false)
   const [searchKey,setSearchKey] = useState("")
+
   const handleClick = (tabname) => {
     setActiveTab(tabname);
   };
@@ -19,20 +20,6 @@ export default function Home() {
       setSearchMode(searchMode)
       setSearchKey(key)
   }
-
-  // const formLoad = async() => {
-  //   try {
-  //     const response = await axios.get('http://localhost:8000/home');
-  //     if (response.data.message === 'Authentication Successful') {
-  //       const user = response.data.user;
-  //       console.log('User data:', user);
-  //     } else {
-  //       console.log('Not authenticated');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error fetching data:', error);
-  //   }
-  // }
 
   return (
     <div>

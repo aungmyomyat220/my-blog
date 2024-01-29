@@ -6,15 +6,19 @@ import {getAllPostHook} from "../../../hooks/getAllPostHook";
 import Like from '@/image/love.png'
 import Image from 'next/image'
 import Comment from '@/image/chat.png'
+import isAuthenticated from '@/app/auth/authenticate'
+import Swal from 'sweetalert2'
 
 const Foryou = ({searchKey}) => {
   const router = useRouter();
   const [user, setUser] = useState({});
+  const [isAuth, setIsAuth] = useState(false);
   const { data: posts = [], error, isLoading, } = getAllPostHook()
 
   useEffect(() => {
     const userData = sessionStorage["user"];
     if (userData) {
+      setIsAuth(true)
       setUser(JSON.parse(userData));
     }
   }, []);
@@ -48,8 +52,22 @@ const Foryou = ({searchKey}) => {
     return <div>Error: {error.message}</div>;
   }
 
-  const handleClick = (postId) => {
-    router.push(`/posts/${postId}`);
+  const handleClick = async (postId) => {
+    if(!isAuth){
+      await Swal.fire({
+        icon: "warning",
+        title: "Attention",
+        text: "You need to login first",
+        showConfirmButton: true,
+        timer: null,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push('auth/signIn');
+        }
+      })}
+    else if(isAuth){
+      router.push(`/posts/${postId}`);
+    }
   };
 
   const HighlightedTitle = ({ title, searchKey }) => {
