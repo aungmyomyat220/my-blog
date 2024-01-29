@@ -24,7 +24,6 @@ const AboutTab = () => {
       setViewerMode(true);
     } else if (user && user._id === id) {
       setViewerMode(false);
-      setShowUserData(true);
     }
   }, [viewerMode]);
 
@@ -35,7 +34,7 @@ const AboutTab = () => {
         setShowUserData(true);
       }
     }
-  }, [viewerUser]);
+  }, [viewerUser,isLoading]);
 
   return (
     <>
