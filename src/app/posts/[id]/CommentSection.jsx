@@ -4,7 +4,6 @@ import {updatePostHook} from "../../../../hooks/updatePostHook";
 
 const CommentSection = (props) => {
   const {mutateAsync,isLoading} = updatePostHook()
-  console.log("Loading",isLoading)
   const { post } = props;
   const [commentContent, setCommentContent] = useState("");
   const [user, setUser] = useState({});
@@ -37,7 +36,9 @@ const CommentSection = (props) => {
     const updateData = {
        comments: comments
     };
-    await mutateAsync({ Id, updateData});
+    if(commentContent){
+      await mutateAsync({ Id, updateData});
+    }
     setCommentContent("");
   };
 
