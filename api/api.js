@@ -164,7 +164,6 @@ export const getSpecificPost = async (postId) => {
 
 export const getPost = async () => {
   try {
-    console.log("URL",API_BASE_URL)
     const response = await fetch(`${API_BASE_URL}/posts`, {
       headers: {
         "API_KEY" : apiKey

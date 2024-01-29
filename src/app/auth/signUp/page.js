@@ -62,7 +62,6 @@ const Page = ({onchange}) => {
     }
 
     const handleClick = async (e) => {
-        console.log("Image",image)
         e.preventDefault();
         if (!user.userName || !user.userEmail || !user.password || !user.confirmPassword) {
             setError("Please fill in all the required fields.");
