@@ -1,5 +1,4 @@
 import React from 'react';
-import CommentUser from '../../../image/user.png'
 import Image from "next/image";
 
 const ViewComment = (props) => {

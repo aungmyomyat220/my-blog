@@ -62,11 +62,11 @@ const Page = ({onchange}) => {
     }
 
     const handleClick = async (e) => {
+        console.log("Image",image)
         e.preventDefault();
-        // Check if any of the required fields are blank
         if (!user.userName || !user.userEmail || !user.password || !user.confirmPassword) {
             setError("Please fill in all the required fields.");
-            return;
+            return false;
         }
 
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -77,6 +77,11 @@ const Page = ({onchange}) => {
 
         if (user.password.length<5) {
             setError("Please Enter password at least 5 digits");
+            return;
+        }
+
+        if(!image){
+            setError("Please Upload Image")
             return;
         }
 
