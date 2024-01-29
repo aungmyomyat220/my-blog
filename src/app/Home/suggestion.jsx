@@ -6,7 +6,7 @@ import fire from "../../image/fire.png";
 import { useRouter } from "next/navigation";
 import {getAllUsersHook} from "../../../hooks/getAllUsersHook"
 import {updateUserHook} from '../../../hooks/updateUserHook'
-import {getModifiedUsersHook} from "../../../hooks/getModifiedUser";
+import {getModifiedUsersHook} from "../../../hooks/getModifiedUserHook";
 
 const Suggestion = () => {
   const { data: users = [] } = getAllUsersHook()

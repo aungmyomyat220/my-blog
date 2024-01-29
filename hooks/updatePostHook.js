@@ -6,7 +6,7 @@ export const updatePostHook = () => {
     const queryClient = useQueryClient();
     return useMutation(
         async ({Id,updateData}) => {
-          return await axios.patch(`${API_BASE_URL}/posts/${Id}`, updateData,{
+          return await axios.put(`${API_BASE_URL}/posts/${Id}`, updateData,{
               headers: {
                   "API_KEY" : apiKey
               }
