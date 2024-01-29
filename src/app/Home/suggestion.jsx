@@ -8,7 +8,6 @@ import {getAllUsersHook} from "../../../hooks/getAllUsersHook"
 import {updateUserHook} from '../../../hooks/updateUserHook'
 import {getModifiedUsersHook} from "../../../hooks/getModifiedUserHook";
 import Swal from 'sweetalert2'
-import { fi } from 'date-fns/locale'
 
 const Suggestion = () => {
   const { data: users = [] } = getAllUsersHook()

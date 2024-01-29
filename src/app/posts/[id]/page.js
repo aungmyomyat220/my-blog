@@ -67,13 +67,8 @@ const Post = () => {
         dispatch(setLoveReact(postId));
     };
 
-    const handleLoveClick = () => {
-
-    };
-
     const handleBothClick = () => {
         like(postId);
-        handleLoveClick();
     };
 
     const openComment = () => {
@@ -154,7 +149,7 @@ const Post = () => {
                                 className="border-y mb-7 py-4 pl-6 flex flex-row text-gray-500 text-sm justify-between">
                                 <div className={'flex'}>
                                     <div className="flex mr-2 cursor-pointer">
-                                        {postData.loveData[postId]?.isLoved ? <Image
+                                        {filterPost.like? <Image
                                             src={Love}
                                             alt="Like"
                                             className="w-5 h-5 mr-2"
@@ -167,7 +162,7 @@ const Post = () => {
                                             height={0}
                                             width={0}
                                         />}
-                                        <span>{postData.loveData[postId]?.loveCount}</span>
+                                        {/*<span>{postData.loveData[postId]?.loveCount}</span>*/}
                                     </div>
                                     <div className="flex mr-5 cursor-pointer">
                                         <Image src={Comment} alt="Like" className="w-6 h-6 mr-2" onClick={openComment}
