@@ -3,8 +3,11 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { formatDate } from "../../../public/js/getDate";
 import {getAllPostHook} from "../../../hooks/getAllPostHook";
+import Like from '@/image/love.png'
+import Image from 'next/image'
+import Comment from '@/image/chat.png'
 
-const Foryou = ({searchKey,searchMode}) => {
+const Foryou = ({searchKey}) => {
   const router = useRouter();
   const [user, setUser] = useState({});
   const { data: posts = [], error, isLoading, } = getAllPostHook()
@@ -53,13 +56,10 @@ const Foryou = ({searchKey,searchMode}) => {
     if (!searchKey) {
       return <span className="font-bold mb-3 text-2xl">{title}</span>;
     }
-
     const index = title.toLowerCase().indexOf(searchKey.toLowerCase());
-
     if (index === -1) {
       return <span className="font-bold mb-3 text-2xl">{title}</span>;
     }
-
     return (
         <span className="font-bold mb-3 text-2xl">
       {title.substring(0, index)}
@@ -98,13 +98,27 @@ const Foryou = ({searchKey,searchMode}) => {
               <HighlightedTitle title={post.title} searchKey={searchKey} />
             </span>
             <span
-              className="line-clamp-3 mb-8"
+              className="line-clamp-3 mb-5"
               onClick={() => {
                 handleClick(post._id);
               }}
             >
               {post.content}...
             </span>
+
+            <span className={'mb-3 flex items-center'}>
+              <Image
+                src={Like}
+                alt="Like"
+                className="w-5 h-5 mr-1"
+              />
+              <span className={'mr-2'}>{post.like}</span>
+              <Image src={Comment} alt="Like" className="w-6 h-6 mr-1"
+                     height={0}
+                     width={0}/>
+              <span>{post.comments.length}</span>
+            </span>
+
           </div>
           <div className="mt-10">
             {post.image && (
