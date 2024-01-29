@@ -15,7 +15,7 @@ const Suggestion = () => {
   const {mutateAsync} = updateUserHook()
   const [topThreePosts, setTopThreePosts] = useState([]);
   const [seeAllUser,setSeeAllUser] = useState(false)
-  const [firstFourUser, setFirstFourUser] = useState([]);
+  const [allUser, setAllUser] = useState([]);
   const [follower, setFollower] = useState([]);
   const router = useRouter();
   const [user, setUser] = useState({});
@@ -46,11 +46,16 @@ const Suggestion = () => {
     (filterUser) => filterUser._id !== user._id && !followerList[0]?.followers.includes(filterUser._id)
   );
 
-  if(filteredUsers.length > 1){
-    const res = filteredUsers.slice(0,1)
-    filteredUsers = {}
-    filteredUsers = res
-  }
+  useEffect(() => {
+    if(filteredUsers.length > 3){
+      setSeeAllUser(true)
+      const res = filteredUsers.slice(0,3)
+      setAllUser(res)
+    }
+    if(filteredUsers.length < 3){
+      setAllUser(filteredUsers)
+    }
+  }, [followerList]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -134,9 +139,9 @@ const Suggestion = () => {
 
       <div className="mt-14">
         <span className="font-medium text-lg">Who to Follow</span>
-        {filteredUsers.map((user) => {
+        {allUser.map((user) => {
           return (
-            <div className="h-20 flex mt-3" key={user._id}>
+            <div className="h-16 flex mt-3" key={user._id}>
               <span className={'w-2/12'}>
                 <Image
                   src={user.image}
