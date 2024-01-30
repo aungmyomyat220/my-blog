@@ -56,13 +56,13 @@ const HomeTab = ({searchKey,searchMode}) => {
   };
 
   return (
-    <div className="no-scrollbar">
+    <div className="no-scrollbar mx-3">
       {sortedPosts.map((post) => (
           <div
-            className="grid grid-cols-5 px-8 py-10 border-b border-gray-300 mx-5 cursor-pointer"
+            className="grid grid-cols-5 py-10 border-b border-gray-300 mx-5 cursor-pointer"
             key={post._id}
           >
-            <div className="flex flex-col mx-5 col-span-4">
+            <div className="flex flex-col col-span-4">
               <span className="mb-3 text-gray-500">
                 {formatDate(post.date)}
               </span>
@@ -83,14 +83,15 @@ const HomeTab = ({searchKey,searchMode}) => {
                 {post.content}
               </span>
 
-              <div className="flex mr-5 cursor-pointer mt-5">
-                {<Image src={Like} alt="Like" className="w-5 h-5 mr-2" />}
-                <span>{loveData.loveCount}</span>
-                <div className="flex mr-5 cursor-pointer">
+              <div className="flex mr-5 cursor-pointer mt-5 items-center">
+                <Image src={Like} alt="Like" className="w-5 h-5 mr-1" />
+                <span>{post.like}</span>
+
+                <div className="flex ml-3 cursor-pointer">
                   <Image
                     src={Comment}
                     alt="Like"
-                    className="w-5 h-5 mr-2"
+                    className="w-5 h-5 mr-1"
                     width={0}
                     height={0}
                   />

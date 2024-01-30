@@ -13,7 +13,7 @@ export default function Home() {
   const handleClick = (tabname) => {
     setActiveTab(tabname);
   };
-  console.log('Cookies after login:', Cookies.get());
+  // console.log('Cookies after login:', Cookies.get());
 
     const handleChange = (data) => {
       const {key , searchMode} = data
@@ -25,9 +25,9 @@ export default function Home() {
     <div>
       <div className="flex flex-col w-full items-center h-screen">
         <NavBar handleChange={handleChange}></NavBar>
-        <div className="grid grid-cols-6 w-full px-36 h-full">
+        <div className="grid grid-cols-1 sm:grid-cols-6 w-full h-full px-5">
           {/*First Div*/}
-          <div className="col-span-4 pt-10 px-16">
+          <div className="col-span-4 pt-10">
             {/*menu*/}
             <div className="border-b grid grid-cols-12 text-center text-gray-500">
               <span
@@ -51,6 +51,7 @@ export default function Home() {
               <span className="col-span-8"></span>
             </div>
             {/*Data*/}
+
             <div>
                 <ForYou
                   searchKey={searchKey}
@@ -61,10 +62,10 @@ export default function Home() {
           </div>
 
           {/*Second Div*/}
-          <div className="col-span-2 border-l pt-14 pl-10">
+          <div className="col-span-2 sm:border-l pt-14 px-5 pb-20">
             <Suggestion></Suggestion>
           </div>
-        </div>
+          </div>
       </div>
       {/*  <AblyConnect></AblyConnect>*/}
       {/*  <AblyConnect></AblyConnect>*/}

@@ -31,15 +31,15 @@ const Page = () => {
         <>
             <div className='w-full h-screen'>
                 <NavBar handleChange={handleChange}></NavBar>
-                <div className='w-full flex'>
-                    <div className='w-2/3 pl-32'>
-                        <ContentPage
-                            searchKey={searchKey}
-                            searchMode={searchMode}
-                        />
-                    </div>
-                    <div className='w-1/3 border-l-2 border-gray-300 ml-32'>
+                <div className='w-full flex flex-col sm:flex-row mt-7'>
+                    <div className='sm:w-1/3 sm:border-l-2 border-gray-300 ml-32 sm:flex sm:justify-end'>
                         <Sidebar></Sidebar>
+                    </div>
+                    <div className='sm:w-2/3 sm:flex sm:justify-start'>
+                        <ContentPage
+                          searchKey={searchKey}
+                          searchMode={searchMode}
+                        />
                     </div>
                 </div>
             </div>

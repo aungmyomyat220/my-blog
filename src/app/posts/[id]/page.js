@@ -7,12 +7,11 @@ import Like from "../../../image/love.png";
 import Love from "../../../image/heart.png";
 import Comment from "../../../image/chat.png";
 import {useDispatch, useSelector} from "react-redux";
-import { setAuthor, setLoveReact } from '../../../../Global Redux/createSlice/postSlice'
 import CommentSection from "@/app/posts/[id]/CommentSection";
-import { updatePostHook } from '../../../../hooks/updatePostHook'
 import Swal from "sweetalert2";
 import '../../../../public/css/loading.css';
 import {getSpecificPostHook} from "../../../../hooks/getSpecificPostHook";
+import {updatePostHook} from '../../../../hooks/updatePostHook'
 
 const Post = () => {
     const {mutateAsync:deletePost} = updatePostHook()
@@ -21,10 +20,9 @@ const Post = () => {
     const [viewerMode , setViewerMode] = useState(false)
     const [comment, setComment] = useState(false)
     const [showPostOption, setShowPostOption] = useState(false)
-    const dispatch = useDispatch();
-    const postData = useSelector((state) => state.post);
     const ref = useRef()
     const {data:filterPost,isLoading,isError} = getSpecificPostHook(postId)
+    const {mutateAsync:updateLike} = updatePostHook()
     const router = useRouter()
     let user = {}
     const userData = sessionStorage.getItem('user');
@@ -63,12 +61,22 @@ const Post = () => {
         setSelectedImage(null);
     };
 
-    const like = (postId) => {
-        dispatch(setLoveReact(postId));
-    };
-
-    const handleBothClick = () => {
-        like(postId);
+    const handleBothClick = (param) => {
+        const Id = filterPost.post._id
+        if(param === "like"){
+            const like = parseInt(filterPost.post.like) + 1
+            const updateData = {
+                like : like
+            }
+            updateLike({Id,updateData})
+        }
+        if(param === "unlike"){
+            const like = parseInt(filterPost.post.like) - 1
+            const updateData = {
+                like : like
+            }
+            updateLike({Id,updateData})
+        }
     };
 
     const openComment = () => {
@@ -125,7 +133,7 @@ const Post = () => {
                                 <span className="text-3xl font-bold cursor-pointer"
                                       onClick={() => router.push("/Home")}>My Blog</span>
                             </div>
-                            <div className="text-6xl font-semibold mt-12 mb-5">
+                            <div className="sm:text-6xl text-4xl font-semibold mt-12 mb-5">
                                 {filterPost.post.title}
                             </div>
                             <div className="font-bold flex my-6 ">
@@ -152,17 +160,17 @@ const Post = () => {
                                         {filterPost.like? <Image
                                             src={Love}
                                             alt="Like"
-                                            className="w-5 h-5 mr-2"
-                                            onClick={handleBothClick}
+                                            className="w-5 h-5 mr-1"
+                                            onClick={()=>handleBothClick("unlike")}
                                         /> : <Image
                                             src={Like}
                                             alt="Like"
-                                            className="w-5 h-5 mr-2"
-                                            onClick={handleBothClick}
+                                            className="w-5 h-5 mr-1"
+                                            onClick={()=>handleBothClick("like")}
                                             height={0}
                                             width={0}
                                         />}
-                                        {/*<span>{postData.loveData[postId]?.loveCount}</span>*/}
+                                        <span>{filterPost.post.like}</span>
                                     </div>
                                     <div className="flex mr-5 cursor-pointer">
                                         <Image src={Comment} alt="Like" className="w-6 h-6 mr-2" onClick={openComment}

@@ -160,7 +160,7 @@ const Page = () => {
 
   return (
     <>
-      <div className="flex flex-col w-full h-screen items-center mt-10">
+      <div className="flex flex-col w-full h-screen items-center mt-10 px-2">
         <div className="w-full flex flex-col max-w-7xl justify-center items-center">
           <div className="w-full flex justify-between">
             <span className="font-bold text-5xl cursor-pointer" onClick={()=> {router.push('/Home')}}>My Blog</span>
@@ -184,7 +184,7 @@ const Page = () => {
           <div className="max-w-4xl w-full mt-10 flex flex-col font-serif">
             <div className={'w-full text-red-500 text-left text-2xl mb-7'}>{error}</div>
             <input
-              className="hover:border-transparent focus:border-transparent outline-none px-4 text-5xl"
+              className="hover:border-transparent focus:border-transparent outline-none px-4 sm:text-5xl text-3xl"
               placeholder="Title"
               value={postData.title}
               name="title"
@@ -234,14 +234,12 @@ const Page = () => {
                   }
 
                   <textarea
-                      className="hover:border-transparent focus:border-transparent outline-none px-4 text-xl"
+                      className="hover:border-transparent focus:border-transparent outline-none text-xl h-screen w-[350px] sm:w-[780px]"
                       placeholder="Tell Your Story"
                       name="content"
                       value={postData.content}
                       onClick={() => setShowButton(true)}
                       onChange={handleInputChange}
-                      rows={100}
-                      cols={90}
                   />
                 </div>
               </div>

@@ -81,7 +81,7 @@ const Navbar = ({navFlag,handleChange}) => {
         >
           My Blog
         </span>
-        <div className="container-input">
+        <div className="container-input hidden sm:block">
           <input
             type="text"
             placeholder="Search"
@@ -105,7 +105,8 @@ const Navbar = ({navFlag,handleChange}) => {
       </div>
 
       {showProfile ? (
-        <div className="px-6 mt-3 text-center flex items-center">
+        <div className="mt-3 text-center flex items-center">
+          <div className={'hidden sm:block'}>
           <Link className="flex cursor-pointer" href={`../admin-dashboard/${user._id}`}>
             <Image
               src={WritePost}
@@ -114,8 +115,9 @@ const Navbar = ({navFlag,handleChange}) => {
               height={0}
               alt="write post"
             ></Image>
-            Write Post
+            <span>Write Post</span>
           </Link>
+          </div>
           {/* Noti */}
           <button className="button ml-5 cursor-pointer">
             <svg viewBox="0 0 448 512" className="bell">
@@ -141,7 +143,12 @@ const Navbar = ({navFlag,handleChange}) => {
                   className="py-1 text-sm text-gray-700 dark:text-gray-200"
                   aria-labelledby="dropdownDefaultButton"
                 >
-                  <li onClick={()=>{router.push(`/profile/${user._id}`)}}>
+                  <li className={'sm:hidden'}>
+                    <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" href={`../admin-dashboard/${user._id}`}>
+                      Write Post
+                    </a>
+                  </li>
+                  <li onClick={() => {router.push(`/profile/${user._id}`)}}>
                     <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                       View Profile
                     </a>
@@ -157,7 +164,7 @@ const Navbar = ({navFlag,handleChange}) => {
           </div>
         </div>
       ) : (
-        <div className="px-6 mt-3 text-center">
+        <div className="md:px-6 mt-3 text-center">
           <button
             className="bg-gray-600 px-6 py-1 text-white rounded-md"
             value="login"

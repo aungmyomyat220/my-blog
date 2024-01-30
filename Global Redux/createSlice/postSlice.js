@@ -1,23 +1,32 @@
 // postSlice.js
 import { createSlice } from '@reduxjs/toolkit';
-import {updatePostHook} from "../../hooks/updatePostHook";
 
 const postSlice = createSlice({
     name: 'post',
     initialState: {
-        like : ""
+        title: '',
+        content: '',
+        date: '',
+        author: '',
+        loveData: {},
+        comment : "",
+        image: null,
     },
     reducers: {
-        setLoveReact: async(state, action) => {
+        setLoveReact: (state, action) => {
             const postId = action.payload;
-            const {mutateAsync: like} = updatePostHook()
-            try {
-                const updateData = {
-                    like : 1
+            if (state.loveData[postId]) {
+                state.loveData[postId].isLoved = !state.loveData[postId].isLoved;
+                if (state.loveData[postId].isLoved) {
+                    state.loveData[postId].loveCount++;
+                } else {
+                    state.loveData[postId].loveCount--;
+                }
+            } else {
+                state.loveData[postId] = {
+                    isLoved: true,
+                    loveCount: 1,
                 };
-                await like({ Id: postId, updateData });
-            } catch (error) {
-                console.log(error)
             }
         },
     },

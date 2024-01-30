@@ -55,7 +55,7 @@ const Sidebar = () => {
   }
 
   return (
-    <>
+    <div>
       <div className="pt-14 flex flex-col pl-10">
         {confirmUser && (
           <>
@@ -157,7 +157,7 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

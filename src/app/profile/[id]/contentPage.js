@@ -24,8 +24,8 @@ const ContentPage = ({searchKey,searchMode}) => {
   const confirmUser = viewedUser[0]
 
   return (
-    <>
-      <div className="text-black p-8">
+    <div>
+      <div className="text-black px-8">
         <span className="text-4xl font-bold">
           {
             confirmUser && confirmUser._id === user._id ? "Your Profile" : confirmUser&&confirmUser.userName
@@ -56,7 +56,7 @@ const ContentPage = ({searchKey,searchMode}) => {
               searchMode={searchMode}
           />
           : <AboutTab />}</div>
-    </>
+    </div>
   );
 };
 
