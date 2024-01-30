@@ -25,7 +25,7 @@ export default function Home() {
     <div>
       <div className="flex flex-col w-full items-center h-screen">
         <NavBar handleChange={handleChange}></NavBar>
-        <div className="grid grid-cols-1 sm:grid-cols-6 w-full h-full px-5">
+        <div className="grid grid-cols-1 sm:grid-cols-6 w-full h-full px-5 md:px-48">
           {/*First Div*/}
           <div className="col-span-4 pt-10">
             {/*menu*/}
