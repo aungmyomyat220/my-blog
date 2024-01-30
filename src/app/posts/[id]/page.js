@@ -226,7 +226,7 @@ const Post = () => {
                             </div>}
                             <div className="flex flex-col justify-center items-center w-full">
                                 <div className="w-full max-w-4xl flex flex-col mt-10">
-                                    <span className="leading-7 tracking-normal bg-red-500">
+                                    <span className="leading-7 tracking-normal">
                                       {filterPost.post.content}
                                     </span>
                                 </div>

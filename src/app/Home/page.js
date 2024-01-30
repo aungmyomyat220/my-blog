@@ -51,7 +51,6 @@ export default function Home() {
               <span className="col-span-8"></span>
             </div>
             {/*Data*/}
-
             <div>
                 <ForYou
                   searchKey={searchKey}
@@ -62,7 +61,7 @@ export default function Home() {
           </div>
 
           {/*Second Div*/}
-          <div className="col-span-2 sm:border-l pt-14 px-5 pb-20">
+          <div className="col-span-2 sm:border-l pt-14 px-5 pb-20 md:pl-10">
             <Suggestion></Suggestion>
           </div>
           </div>

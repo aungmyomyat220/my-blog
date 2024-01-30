@@ -31,7 +31,7 @@ const Page = () => {
         <>
             <div className='w-full h-screen'>
                 <NavBar handleChange={handleChange}></NavBar>
-                <div className='w-full flex flex-col sm:flex-row px-10'>
+                <div className='w-full flex flex-col sm:flex-row px-10 md:px-40'>
                     <div className='sm:w-1/3 sm:border-r-2 sm:h-screen border-gray-300 ml-14'>
                         <Sidebar></Sidebar>
                     </div>

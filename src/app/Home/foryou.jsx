@@ -79,7 +79,7 @@ const Foryou = ({searchKey}) => {
       return <span className="font-bold mb-3 text-2xl">{title}</span>;
     }
     return (
-        <span className="font-bold mb-3 text-2xl">
+        <span className="font-bold mb-3 text-2xl line-clamp-2">
       {title.substring(0, index)}
           <span className="bg-gradient-to-r from-green-200 to-green-500">{title.substring(index, index + searchKey.length)}</span>
           {title.substring(index + searchKey.length)}
@@ -94,7 +94,7 @@ const Foryou = ({searchKey}) => {
           className="grid grid-cols-5 border-b border-gray-300 mt-8 cursor-pointer"
           key={post._id}
         >
-          <div className="flex flex-col mx-5 col-span-4">
+          <div className="flex flex-col col-span-3">
             <div className="flex">
               <span
                 className="hover:underline"
@@ -138,7 +138,7 @@ const Foryou = ({searchKey}) => {
             </span>
 
           </div>
-          <div className="mt-10">
+          <div className="mt-10 mr-8 col-span-2">
             {post.image && (
               <img
                 src={post.image}

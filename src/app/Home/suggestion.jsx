@@ -155,11 +155,11 @@ const Suggestion = () => {
                 <span className="font-bold hover:underline cursor-pointer" onClick={()=> router.push(`/profile/${user._id}`)}>{user.userName}</span>
                 {
                   user.userBio.mainLanguage ?
-                      <span className="text-left text-sm text-gray-500">
+                      <span className="text-left text-sm text-gray-500 line-clamp-2">
                         {user.userBio.mainLanguage} {user.userBio.experience} year{user.userBio.experience > 1 ? "s" : ""} Developer at {user.userBio.companyName}
                       </span>
                       :
-                      <span className="text-left text-sm text-gray-500">
+                      <span className="text-left text-sm text-gray-500 line-clamp-2">
                         {/* eslint-disable-next-line react/no-unescaped-entities */}
                         Details doesn't update yet
                       </span>
