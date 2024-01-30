@@ -25,8 +25,8 @@ const ContentPage = ({searchKey,searchMode}) => {
 
   return (
     <div>
-      <div className="text-black px-8">
-        <span className="text-4xl font-bold">
+      <div className="text-black">
+        <span className="text-4xl font-bold hidden sm:block sm:my-10">
           {
             confirmUser && confirmUser._id === user._id ? "Your Profile" : confirmUser&&confirmUser.userName
           }

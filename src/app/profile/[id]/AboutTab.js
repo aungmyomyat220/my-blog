@@ -62,7 +62,7 @@ const AboutTab = () => {
 
   return (
     <>
-      <div className="px-8 py-8 mx-5">
+      <div>
         {viewerMode ? (
           showUserData ? (
             <div className="bg-gray-200 h-80 flex flex-col p-5 mt-14">

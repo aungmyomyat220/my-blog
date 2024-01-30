@@ -128,7 +128,7 @@ const Post = () => {
                     </div>}
                     <div
                         className={`flex flex-col items-center w-full h-[2000px] ${comment ? ' opacity-50 backdrop-brightness-50 ' : 'opacity-100'}`}>
-                        <div className="max-w-5xl w-full h-32 flex flex-col mt-10 px-5">
+                        <div className="max-w-5xl w-full h-32 flex flex-col mt-10 px-5 bg-blue-500">
                             <div>
                                 <span className="text-3xl font-bold cursor-pointer"
                                       onClick={() => router.push("/Home")}>My Blog</span>
@@ -191,7 +191,7 @@ const Post = () => {
                                 <div
                                     hidden={showPostOption ? false : true}
                                     id="dropdown"
-                                    className="z-10 absolute right-52 mt-7 w-32 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
+                                    className="z-10 absolute md:right-52 right-0 mt-7 w-32 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
                                 >
                                     <ul
                                         className="py-1 text-sm text-gray-700 dark:text-gray-200"
@@ -226,9 +226,9 @@ const Post = () => {
                             </div>}
                             <div className="flex flex-col justify-center items-center w-full">
                                 <div className="w-full max-w-4xl flex flex-col mt-10">
-            <span className="leading-7 tracking-normal">
-              {filterPost.post.content}
-            </span>
+                                    <span className="leading-7 tracking-normal bg-red-500">
+                                      {filterPost.post.content}
+                                    </span>
                                 </div>
                             </div>
 

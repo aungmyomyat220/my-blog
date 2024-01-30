@@ -31,11 +31,11 @@ const Page = () => {
         <>
             <div className='w-full h-screen'>
                 <NavBar handleChange={handleChange}></NavBar>
-                <div className='w-full flex flex-col sm:flex-row mt-7'>
-                    <div className='sm:w-1/3 sm:border-l-2 border-gray-300 ml-32 sm:flex sm:justify-end'>
+                <div className='w-full flex flex-col sm:flex-row px-10'>
+                    <div className='sm:w-1/3 sm:border-r-2 sm:h-screen border-gray-300 ml-14'>
                         <Sidebar></Sidebar>
                     </div>
-                    <div className='sm:w-2/3 sm:flex sm:justify-start'>
+                    <div className='sm:w-2/3 sm:ml-5'>
                         <ContentPage
                           searchKey={searchKey}
                           searchMode={searchMode}

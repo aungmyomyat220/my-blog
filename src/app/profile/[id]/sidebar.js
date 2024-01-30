@@ -56,7 +56,7 @@ const Sidebar = () => {
 
   return (
     <div>
-      <div className="pt-14 flex flex-col pl-10">
+      <div className="pt-14 flex flex-col pl-10 sm:pl-0 pb-10">
         {confirmUser && (
           <>
             <Image
