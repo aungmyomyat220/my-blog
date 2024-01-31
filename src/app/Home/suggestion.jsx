@@ -8,6 +8,7 @@ import {getAllUsersHook} from "../../../hooks/getAllUsersHook"
 import {updateUserHook} from '../../../hooks/updateUserHook'
 import {getModifiedUsersHook} from "../../../hooks/getModifiedUserHook";
 import Swal from 'sweetalert2'
+import { fi } from 'date-fns/locale'
 
 const Suggestion = () => {
   const { data: users = [] } = getAllUsersHook()
@@ -46,12 +47,18 @@ const Suggestion = () => {
   );
 
   useEffect(() => {
-    if(filteredUsers.length > 3){
+    if(filteredUsers.length>3){
       setSeeAllUser(true)
+    }
+  }, [filteredUsers.length])
+
+  useEffect(() => {
+    if(filteredUsers.length > 3){
       const res = filteredUsers.slice(0,3)
       setAllUser(res)
     }
-    if(filteredUsers.length < 3){
+    if(filteredUsers.length <= 3){
+      setSeeAllUser(false)
       setAllUser(filteredUsers)
     }
   }, [filteredUsers.length]);
@@ -160,7 +167,6 @@ const Suggestion = () => {
                       </span>
                       :
                       <span className="text-left text-sm text-gray-500 line-clamp-2">
-                        {/* eslint-disable-next-line react/no-unescaped-entities */}
                         Details doesn't update yet
                       </span>
                 }
