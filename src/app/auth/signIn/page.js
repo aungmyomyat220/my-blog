@@ -40,11 +40,11 @@ const Page = () => {
           timer: 1000,
         });
         router.push("/Home");
-      } else if (response.statusCode === 404) {
+      }else if (response.statusCode === 404) {
         await Swal.fire({
-          icon: "warning",
-          title: "Attention",
-          text: "Fill the required fields",
+          icon: "error",
+          title: "Error",
+          text: "User Not Found",
           showConfirmButton: true,
           timer: null,
         });
