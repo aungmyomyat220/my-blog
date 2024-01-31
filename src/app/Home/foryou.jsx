@@ -130,7 +130,7 @@ const Foryou = ({searchKey}) => {
                 alt="Like"
                 className="w-5 h-5 mr-1"
               />
-              <span className={'mr-2'}>{post.like}</span>
+              <span className={'mr-2'}>{post.like.length}</span>
               <Image src={Comment} alt="Like" className="w-6 h-6 mr-1"
                      height={0}
                      width={0}/>
