@@ -6,7 +6,6 @@ import Image from "next/image";
 import Like from "../../../image/love.png";
 import Love from "../../../image/heart.png";
 import Comment from "../../../image/chat.png";
-import {useDispatch, useSelector} from "react-redux";
 import CommentSection from "@/app/posts/[id]/CommentSection";
 import Swal from "sweetalert2";
 import '../../../../public/css/loading.css';
@@ -22,7 +21,7 @@ const Post = () => {
     const [showPostOption, setShowPostOption] = useState(false)
     const ref = useRef()
     const {data:filterPost,isLoading,isError} = getSpecificPostHook(postId)
-    const {mutateAsync:updateLike} = updatePostHook()
+    const {mutateAsync:updateLike,isLoading:Liking} = updatePostHook()
     const router = useRouter()
     let user = {}
     const userData = sessionStorage.getItem('user');
@@ -63,17 +62,19 @@ const Post = () => {
 
     const handleBothClick = (param) => {
         const Id = filterPost.post._id
+        const like = [...filterPost.post.like]
         if(param === "like"){
-            const like = parseInt(filterPost.post.like) + 1
+            like.push(user._id)
             const updateData = {
                 like : like
             }
             updateLike({Id,updateData})
         }
         if(param === "unlike"){
-            const like = parseInt(filterPost.post.like) - 1
+            const res = like.filter(like=>like !== user._id)
+            console.log("Res",res)
             const updateData = {
-                like : like
+                like : res
             }
             updateLike({Id,updateData})
         }
@@ -157,7 +158,7 @@ const Post = () => {
                                 className="border-y mb-7 py-4 pl-6 flex flex-row text-gray-500 text-sm justify-between">
                                 <div className={'flex'}>
                                     <div className="flex mr-2 cursor-pointer">
-                                        {filterPost.like? <Image
+                                        {filterPost.post.like.includes(user._id)? <Image
                                             src={Love}
                                             alt="Like"
                                             className="w-5 h-5 mr-1"
@@ -170,7 +171,7 @@ const Post = () => {
                                             height={0}
                                             width={0}
                                         />}
-                                        <span>{filterPost.post.like}</span>
+                                        <span>{filterPost.post.like.length}</span>
                                     </div>
                                     <div className="flex mr-5 cursor-pointer">
                                         <Image src={Comment} alt="Like" className="w-6 h-6 mr-2" onClick={openComment}

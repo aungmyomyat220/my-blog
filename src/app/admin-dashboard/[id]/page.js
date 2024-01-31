@@ -28,7 +28,7 @@ const Page = () => {
     authorImage : user.image,
     date: new Date(),
     image : image,
-    like : '',
+    like : [],
     delFlag : false,
     comment : []
   });

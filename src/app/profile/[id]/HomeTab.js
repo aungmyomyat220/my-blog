@@ -12,7 +12,6 @@ import {useParams, useRouter} from "next/navigation";
 const HomeTab = ({searchKey,searchMode}) => {
   const {id} = useParams()
   const router = useRouter();
-  const { loveData } = useSelector((state) => state.post);
   const [user, setUser] = useState({});
   const { data: posts = [] } = getAllPostHook()
 
@@ -85,7 +84,7 @@ const HomeTab = ({searchKey,searchMode}) => {
 
               <div className="flex mr-5 cursor-pointer mt-5 items-center">
                 <Image src={Like} alt="Like" className="w-5 h-5 mr-1" />
-                <span>{post.like}</span>
+                <span>{post.like.length}</span>
 
                 <div className="flex ml-3 cursor-pointer">
                   <Image
