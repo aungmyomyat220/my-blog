@@ -14,6 +14,7 @@ const Foryou = ({searchKey}) => {
   const [user, setUser] = useState({});
   const [isAuth, setIsAuth] = useState(false);
   const { data: posts = [], error, isLoading, } = getAllPostHook()
+  console.log("All Posts=>",posts)
 
   useEffect(() => {
     const userData = sessionStorage["user"];
@@ -30,7 +31,7 @@ const Foryou = ({searchKey}) => {
   const now = new Date();
   const postsWithTimeDifferences = filteredPosts.map(post => ({
     ...post,
-    timeDifference: now - new Date(post.date) // Memoized time calculation
+    timeDifference: now - new Date(post.date)
   }));
 
   const sortedPosts = postsWithTimeDifferences.sort((a, b) => a.timeDifference - b.timeDifference);
