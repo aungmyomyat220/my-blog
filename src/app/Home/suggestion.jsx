@@ -147,6 +147,7 @@ const Suggestion = () => {
         <span className="font-medium text-lg">Who to Follow</span>
         {allUser.map((user) => {
           return (
+            <div>
             <div className="h-16 flex mt-3 sm:mb-12 md:mb-4" key={user._id}>
               <span className={'w-2/12'}>
                 <Image
@@ -181,12 +182,13 @@ const Suggestion = () => {
                 </button>
               </span>
             </div>
+            </div>
           );
         })
         }
-        {seeAllUser &&
-          <span className={'hover:underline text-blue-500 cursor-pointer'}>see all ({filteredUsers.length})</span>
-        }
+        {/*{seeAllUser &&*/}
+        {/*  <span className={'hover:underline text-blue-500 cursor-pointer'} onClick={seeMore}>see more</span>*/}
+        {/*}*/}
       </div>
     </div>
   );
