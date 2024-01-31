@@ -234,7 +234,7 @@ const Page = () => {
                   }
 
                   <textarea
-                      className="hover:border-transparent focus:border-transparent outline-none text-xl h-screen w-[350px] sm:w-[780px]"
+                      className="pl-5 hover:border-transparent focus:border-transparent outline-none text-xl h-screen w-[350px] sm:w-[780px]"
                       placeholder="Tell Your Story"
                       name="content"
                       value={postData.content}

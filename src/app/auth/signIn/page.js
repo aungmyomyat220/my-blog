@@ -68,18 +68,17 @@ const Page = () => {
       <div className="flex flex-col justify-center items-center w-full h-screen">
         <div className="max-w-5xl bg-gray-300 w-full h-[600px] rounded-xl flex p-2">
 
-          <div className={`w-1/2 flex justify-center transition-all duration-500`}>
-            <Image src={LoginBanner} width={900} height={1500} alt="loginbanner"></Image>
+          <div className={`sm:w-1/2 flex justify-center transition-all duration-500`}>
+            <Image src={LoginBanner} width={900} height={1500} alt="loginbanner" className={'hidden sm:block'}></Image>
           </div>
           {signUp?
 
-              <div className={`w-1/2 bg-white rounded-lg flex flex-col items-center justify-center transition-all duration-500`}>
+              <div className={`sm:w-1/2 w-full bg-white rounded-lg flex flex-col items-center justify-center transition-all duration-500`}>
               <SignUp onchange={handleChildStateChange}></SignUp>
                   </div>
-
               :
-          <div className={`w-1/2 bg-white rounded-lg flex flex-col items-center justify-center transition-all duration-500 order-2`}>
-            <div className="font-bold text-3xl">Welcome back!</div>
+          <div className={`sm:w-1/2 w-full bg-white rounded-lg flex flex-col items-center justify-center transition-all duration-500 order-2`}>
+            <div className="font-bold sm:text-3xl text-4xl">Welcome back!</div>
             <div className="mt-2 text-xs">Please enter your details</div>
             <div className="mt-12">
               <div className="relative h-11 w-80 ">
