@@ -28,7 +28,6 @@ export const createUser = async (userData) => {
 
 //Login API Function
 export const Login = async (checkUser) => {
-  console.log("Login work")
   try {
     const response = await fetch(`http://localhost:8000/login`, { mode: 'no-cors' },{
       method: "POST",
@@ -38,8 +37,6 @@ export const Login = async (checkUser) => {
       },
       body: JSON.stringify(checkUser),
     });
-
-    alert(response.status)
     if (response.status === 200) {
       const responseData = await response.json();
       return {
