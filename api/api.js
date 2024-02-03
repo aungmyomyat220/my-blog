@@ -1,8 +1,6 @@
 import axios from "axios";
 const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-// const apiKey = "927e0f9a-4451-4210-8dd1-eb47f8ca9089";
-// const API_BASE_URL = "http://localhost:8000";
 export const createUser = async (userData) => {
   try {
     const response = await fetch(`${API_BASE_URL}/users`, {
@@ -30,8 +28,9 @@ export const createUser = async (userData) => {
 
 //Login API Function
 export const Login = async (checkUser) => {
+  console.log("Login work")
   try {
-    const response = await fetch(`${API_BASE_URL}/login`, {
+    const response = await fetch(`http://localhost:8000/login`, { mode: 'no-cors' },{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,6 +39,7 @@ export const Login = async (checkUser) => {
       body: JSON.stringify(checkUser),
     });
 
+    alert(response.status)
     if (response.status === 200) {
       const responseData = await response.json();
       return {
