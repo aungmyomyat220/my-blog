@@ -14,7 +14,6 @@ const Foryou = ({searchKey}) => {
   const [user, setUser] = useState({});
   const [isAuth, setIsAuth] = useState(false);
   const { data: posts = [], error, isLoading, } = getAllPostHook()
-  console.log("All Posts=>",posts)
 
   useEffect(() => {
     const userData = sessionStorage["user"];

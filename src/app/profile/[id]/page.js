@@ -13,13 +13,19 @@ const Page = () => {
     const [searchKey,setSearchKey] = useState("")
     const router = useRouter()
     useEffect(() => {
-        const isAuth = isAuthenticated;
-        if(!isAuth){
+        const userData = sessionStorage.getItem('user');
+        if(!userData){
           router.push("/")
         }else{
           router.push(`/profile/${id}`)
         }
       }, [])
+
+    let user = {}
+    const userData = sessionStorage.getItem('user');
+    if (userData) {
+        user = JSON.parse(userData)
+    }
 
     const handleChange = (data) => {
         const {key , searchMode} = data
