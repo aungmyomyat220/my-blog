@@ -6,7 +6,6 @@ export const createUser = async (userData) => {
     const response = await fetch(`${API_BASE_URL}/users`, {
       method: "POST",
       headers: {
-        "Access-Control-Allow-Origin": true,
         "Content-Type": "application/json",
         "API_KEY" : apiKey
       },
@@ -33,7 +32,6 @@ export const Login = async (checkUser) => {
     const response = await fetch(`${API_BASE_URL}/login`,{
       method: "POST",
       headers: {
-        "Access-Control-Allow-Origin": true,
         "Content-Type": "application/json",
         "API_KEY" : apiKey
       },
@@ -71,7 +69,6 @@ export const checkUserExist = async (email) => {
     const response = await fetch(`${API_BASE_URL}/checkuser`, {
       method: "POST",
       headers: {
-        "Access-Control-Allow-Origin": true,
         "Content-Type": "application/json",
         "API_KEY" : apiKey
       },
@@ -106,7 +103,6 @@ export const createPost = async (postData) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": true,
         "API_KEY" : apiKey
       },
       body: JSON.stringify(postData),
@@ -125,7 +121,6 @@ export const getUser = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/users`, {
       headers: {
-        "Access-Control-Allow-Origin": true,
         "API_KEY" : apiKey
       }
     });
@@ -141,7 +136,6 @@ export const getModifiedUser = async (userId) => {
     try {
       const response = await axios.get(`${API_BASE_URL}/modifieduser/${userId}`, {
         headers: {
-          "Access-Control-Allow-Origin": true,
           "API_KEY" : apiKey
         }
       });
@@ -157,7 +151,6 @@ export const getSpecificPost = async (postId) => {
     try {
       const response = await axios.get(`${API_BASE_URL}/posts/${postId}`, {
         headers: {
-          "Access-Control-Allow-Origin": true,
           "API_KEY" : apiKey
         }
       });
@@ -172,7 +165,6 @@ export const getPost = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/posts`, {
       headers: {
-        "Access-Control-Allow-Origin": true,
         "API_KEY" : apiKey
       }
     });
@@ -188,7 +180,6 @@ export const updateUser = async (param) => {
     const response = await fetch(`${API_BASE_URL}/users/${Id}`, {
       method: 'PUT',
       headers: {
-        "Access-Control-Allow-Origin": true,
         'Content-Type': 'application/json',
         "API_KEY" : apiKey
       },
