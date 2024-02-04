@@ -8,6 +8,7 @@ export const updatePostHook = () => {
         async ({Id,updateData}) => {
           return await axios.put(`${API_BASE_URL}/posts/${Id}`, updateData,{
               headers: {
+                  "Access-Control-Allow-Origin": true,
                   "API_KEY" : apiKey
               }
           });
