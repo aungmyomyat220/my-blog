@@ -13,7 +13,6 @@ export default function Home() {
   const handleClick = (tabname) => {
     setActiveTab(tabname);
   };
-  // console.log('Cookies after login:', Cookies.get());
 
     const handleChange = (data) => {
       const {key , searchMode} = data
