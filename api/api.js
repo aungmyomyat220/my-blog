@@ -29,7 +29,7 @@ export const createUser = async (userData) => {
 //Login API Function
 export const Login = async (checkUser) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/login`, { mode: 'no-cors' },{
+    const response = await fetch(`${API_BASE_URL}/login`,{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
