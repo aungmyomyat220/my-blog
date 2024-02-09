@@ -126,10 +126,10 @@ const Suggestion = () => {
               <span key={post._id}>
                 <Image
                   src={post.authorImage}
-                  width={20}
-                  height={20}
                   alt="Author Image"
-                  className="rounded-full cursor-pointer mr-3"
+                  width={0}
+                  height={0}
+                  className="rounded-full cursor-pointer mr-3 w-7 h-7"
                 />
               </span>
               <span className="text-sm font-medium cursor-pointer">
@@ -147,7 +147,7 @@ const Suggestion = () => {
         <span className="font-medium text-lg">Who to Follow</span>
         {allUser.map((user) => {
           return (
-            <div>
+            <div key={user._id}>
             <div className="h-16 flex mt-3 sm:mb-12 md:mb-4" key={user._id}>
               <span className={'w-2/12'}>
                 <Image

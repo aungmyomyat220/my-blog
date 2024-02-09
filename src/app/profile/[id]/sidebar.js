@@ -28,7 +28,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     if (!isLoading && !error) {
-      const initialFollowers = data.followers;
+      const initialFollowers = data.user.followers;
       setAlreadyFollow(initialFollowers);
     }
   }, [data]);
