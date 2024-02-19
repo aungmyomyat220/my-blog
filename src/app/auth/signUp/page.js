@@ -6,6 +6,7 @@ import Image from "next/image";
 import ImagePicker from "@/image/plus.jpg";
 import Swal from "sweetalert2";
 import { useMutation } from "@tanstack/react-query";
+import { verifyEmail } from '../../../../api/api'
 
 const Page = ({ onchange }) => {
   const [error, setError] = useState("");
@@ -99,6 +100,7 @@ const Page = ({ onchange }) => {
     }
 
     try {
+      const verify = verifyEmail(user)
       const response = await createUser(user);
       if (response.statusCode === 409) {
         await Swal.fire({
