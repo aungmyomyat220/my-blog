@@ -109,7 +109,6 @@ export const getUser = async () => {
 };
 
 export const verifyEmail = async (user) => {
-  console.log("Verify Email Work")
     try {
       const response = await axios.post(`${API_BASE_URL}/verify_email`,user,{
         headers : {
