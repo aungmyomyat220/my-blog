@@ -92,7 +92,6 @@ const CommentSection = (props) => {
                   </div>
                 </div>
                 <span>Send</span>
-
               </button>}
           </span>
         </div>

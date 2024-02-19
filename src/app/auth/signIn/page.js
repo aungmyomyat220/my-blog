@@ -14,7 +14,7 @@ const Page = () => {
     userEmail: "",
     password: "",
   });
-  const {mutateAsync:Login,isLoading,isError} = loginHook(checkUser)
+  const {mutateAsync:Login,isLoading} = loginHook(checkUser)
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCheckUser((prevCheckUser) => ({
@@ -30,6 +30,16 @@ const Page = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      if(checkUser.userEmail === "" && checkUser.password === ""){
+        await Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Enter Username and Password",
+          showConfirmButton: true,
+          timer: null,
+        });
+        return false;
+      }
       const response = await Login(checkUser)
       if (response.statusCode === 200) {
         sessionStorage.setItem("user", JSON.stringify(response.user));
@@ -40,7 +50,6 @@ const Page = () => {
           timer: 1000,
         });
         router.prefetch("/Home");
-        router.push("/Home");
       } else if (response.statusCode === 404) {
         await Swal.fire({
           icon: "error",

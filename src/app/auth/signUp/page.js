@@ -130,7 +130,6 @@ const Page = ({ onchange }) => {
 
   return (
     <div>
-      {/* eslint-disable-next-line react/no-unescaped-entities */}
       <div className="font-bold text-3xl text-center mb-6">Hello There</div>
       <div>
         {error && <div className="text-red-500 mb-3">{error}</div>}
@@ -140,7 +139,7 @@ const Page = ({ onchange }) => {
           </label>
           <div>
             <input
-              accept="image/*"
+              accept="image/jpeg, image/png"
               type="file"
               id="fileInput"
               onChange={convertToBase64}

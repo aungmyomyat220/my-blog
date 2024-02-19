@@ -3,7 +3,6 @@ import NavBar from "./navbar";
 import { useState } from "react";
 import ForYou from "./foryou";
 import Suggestion from "./suggestion";
-import Cookies from 'js-cookie';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("foryou");
@@ -37,16 +36,6 @@ export default function Home() {
               >
                 For you
               </span>
-              {/*<span*/}
-              {/*  className={`col-span-2 py-4 cursor-pointer ${*/}
-              {/*    activeTab === "following"*/}
-              {/*      ? `border-b border-black`*/}
-              {/*      : `border-0`*/}
-              {/*  }`}*/}
-              {/*  onClick={() => handleClick("following")}*/}
-              {/*>*/}
-              {/*  Following*/}
-              {/*</span>*/}
               <span className="col-span-8"></span>
             </div>
             {/*Data*/}
@@ -65,7 +54,6 @@ export default function Home() {
           </div>
           </div>
       </div>
-      {/*  <AblyConnect></AblyConnect>*/}
       {/*  <AblyConnect></AblyConnect>*/}
     </div>
   );
