@@ -49,7 +49,7 @@ const Page = () => {
           showConfirmButton: false,
           timer: 1000,
         });
-        router.prefetch("/Home");
+        router.push("/Home");
       } else if (response.statusCode === 404) {
         await Swal.fire({
           icon: "error",

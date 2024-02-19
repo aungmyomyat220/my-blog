@@ -144,7 +144,9 @@ const Suggestion = () => {
       </div>
 
       <div className="mt-14">
-        <span className="font-medium text-lg">Who to Follow</span>
+        {
+          allUser.length !== 0 && <span className="font-medium text-lg">Who to Follow</span>
+        }
         {allUser.map((user) => {
           return (
             <div key={user._id}>

@@ -71,15 +71,18 @@ const Sidebar = () => {
             </span>
           </>
         )}
-        <span className="text-gray-500">
-          {follower.length} Follower{follower.length > 1 && "s"}
-        </span>
+        {
+          follower.length !== 0 &&
+              <span className="text-gray-500">
+                {follower.length} Follower{follower.length > 1 && 's'}
+              </span>
+        }
 
         {confirmUser && confirmUser._id === user._id ? (
-          ""
+          ''
         ) : (
           <>
-            {/* Follow Button and Mail */}
+          {/* Follow Button and Mail */}
             <div className="flex mt-5">
               <span className="mr-3" onClick={handleFollow}>
                 <div className="tooltip-container">
@@ -126,9 +129,11 @@ const Sidebar = () => {
 
         {/* Following */}
         <div className="mt-10">
-          <span className="text-md font-bold">Following</span>
-          <div className={"mt-6"}>
-            {follower.map((follower) => {
+          {
+            follower.length !== 0 && <span className="text-md font-bold">Following</span>
+          }
+          <div className={'mt-6'}>
+          {follower.map((follower) => {
               return (
                 <div className={"mt-4 flex"} key={follower._id}>
                   <span
