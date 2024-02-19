@@ -100,7 +100,6 @@ const Page = ({ onchange }) => {
     }
 
     try {
-      const verify = verifyEmail(user)
       const response = await createUser(user);
       if (response.statusCode === 409) {
         await Swal.fire({
@@ -111,10 +110,11 @@ const Page = ({ onchange }) => {
           timer: null,
         });
       } else if (response.statusCode === 200 || 201) {
+        const verify = verifyEmail(user)
         await Swal.fire({
           icon: "success",
           title: "Success",
-          text: "Account Successfully Created",
+          text: "Sent Verify Email",
           showConfirmButton: false,
           timer: 2000,
         });
