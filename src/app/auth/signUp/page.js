@@ -1,11 +1,10 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { createUserHook } from "../../../../hooks/createUserHook";
+import { checkDuplicateUser, createUserHook } from '../../../../hooks/createUserHook'
 import Image from "next/image";
 import ImagePicker from "@/image/plus.jpg";
 import Swal from "sweetalert2";
-import { useMutation } from "@tanstack/react-query";
 import { verifyEmail } from '../../../../api/api'
 
 const Page = ({ onchange }) => {
@@ -30,7 +29,7 @@ const Page = ({ onchange }) => {
     },
   });
 
-  const { mutateAsync: createUser, isLoading, isError } = createUserHook();
+  const { mutateAsync: checkDuplicate, isLoading, isError } = checkDuplicateUser()
   const fileInputRef = useRef(null);
   const convertToBase64 = (e) => {
     let reader = new FileReader();
@@ -100,8 +99,9 @@ const Page = ({ onchange }) => {
     }
 
     try {
-      const response = await createUser(user);
-      if (response.statusCode === 409) {
+      const response = await checkDuplicate(user.userEmail);
+      console.log(response.statusCode)
+      if (response.statusCode === '409') {
         await Swal.fire({
           icon: "error",
           title: "Registered User",
@@ -109,7 +109,7 @@ const Page = ({ onchange }) => {
           showConfirmButton: true,
           timer: null,
         });
-      } else if (response.statusCode === 200 || 201) {
+      } else if (response.statusCode === '200' || '201') {
         const verify = verifyEmail(user)
         await Swal.fire({
           icon: "success",
