@@ -27,7 +27,7 @@ export const checkDuplicateUser = () => {
     async (email) => {
       console.log(email)
       try {
-        const response = await fetch(`http://localhost:8000/checkDuplicateUser`, {
+        const response = await fetch(`${API_BASE_URL}/checkDuplicateUser`, {
           method: "POST",
           headers: {
             "Access-Control-Allow-Origin": true,
@@ -37,16 +37,14 @@ export const checkDuplicateUser = () => {
           body: JSON.stringify({email}),
         });
         if (response.ok) {
-          const data = await response.json(); // Await the response.json() call
-          console.log("Response:", data); // Log the actual data received
-          return data; // Return the data
+          return await response.json();
         } else {
           console.error("Error creating post:", response.statusText);
-          return { error: response.statusText }; // Return an error object
+          return { error: response.statusText };
         }
       } catch (error) {
         console.error("Error creating post:", error);
-        throw error; // Throw the error to be caught by the caller
+        throw error;
       }
     },
   );
