@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect } from 'react'
 import { createUserHook } from '../../../hooks/createUserHook'
 import Swal from 'sweetalert2'
