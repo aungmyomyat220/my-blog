@@ -109,6 +109,7 @@ const Page = ({ onchange }) => {
           showConfirmButton: true,
           timer: null,
         });
+        return false
       } else if (response.statusCode === '200' || '201') {
         const verify = verifyEmail(user)
         await Swal.fire({
@@ -118,6 +119,7 @@ const Page = ({ onchange }) => {
           showConfirmButton: false,
           timer: 2000,
         });
+        router.push('/auth/confirm')
         setError("");
         onchange(false);
       }
@@ -125,10 +127,6 @@ const Page = ({ onchange }) => {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    router.prefetch("auth/signIn");
-  }, [router]);
 
   return (
     <div>
