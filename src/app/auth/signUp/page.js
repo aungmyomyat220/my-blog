@@ -112,12 +112,13 @@ const Page = ({ onchange }) => {
         return false
       } else if (response.statusCode === '200' || '201') {
         const verify = verifyEmail(user)
+        localStorage.setItem("userEmail",user.userEmail )
         await Swal.fire({
           icon: "success",
-          title: "Success",
-          text: "Sent Verify Email",
+          title: "Sent",
+          text: "check verification code in your email",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 3000,
         });
         router.push('/auth/confirm')
         setError("");

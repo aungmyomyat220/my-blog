@@ -22,6 +22,19 @@ export const createUserHook = () => {
   );
 };
 
+export const checkVerificationCode = () => {
+  return useMutation(
+    async (verifyCode) => {
+      return await axios.post(`${API_BASE_URL}/checkVerificationCode`, {code : verifyCode},{
+        headers: {
+          "Access-Control-Allow-Origin": true,
+          "API_KEY" : apiKey
+        }
+      });
+    },
+  );
+};
+
 export const checkDuplicateUser = () => {
   return useMutation(
     async (email) => {
