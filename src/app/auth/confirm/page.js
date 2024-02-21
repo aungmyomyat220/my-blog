@@ -1,15 +1,20 @@
 'use client'
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react'
 import { checkVerificationCode } from '../../../../hooks/createUserHook'
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 
 const Page = () => {
-  const email = localStorage.getItem('userEmail')
   const router = useRouter();
   const { mutateAsync: checkCode, isLoading, isError } = checkVerificationCode();
   const [inputs, setInputs] = useState(['', '', '', '', '', '']);
+  const [email, setEmail] = useState('');
   const inputRefs = useRef([]);
+
+  useEffect(() => {
+    const email = localStorage.getItem('userEmail')
+    setEmail(email)
+  }, [])
 
   const handleClick = () => {
     let verifyCode = "";
