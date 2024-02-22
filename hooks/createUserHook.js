@@ -24,14 +24,23 @@ export const createUserHook = () => {
 
 export const checkVerificationCode = () => {
   return useMutation(
-    async (verifyCode) => {
-      return await axios.post(`${API_BASE_URL}/checkVerificationCode`, {code : verifyCode},{
-        headers: {
-          "Access-Control-Allow-Origin": true,
-          "API_KEY" : apiKey
+      async (verifyCode) => {
+        const response = await fetch(`${API_BASE_URL}/checkVerificationCode`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': true,
+            'API_KEY': apiKey
+          },
+          body: JSON.stringify({ code: verifyCode })
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
         }
-      });
-    },
+
+        return await response.json();
+      }
   );
 };
 

@@ -17,16 +17,16 @@ const Page = () => {
     setEmail(email)
   }, [])
 
-  const handleClick = () => {
+  const handleClick = async() => {
     let verifyCode = "";
     inputs.map(n=>{
       verifyCode += n.toString()
     })
     if (verifyCode !== ""){
-      const res = checkCode(verifyCode)
-      console.log("Response",res.statusCode)
+      const res = await checkCode(verifyCode)
+      console.log("Response",res.json())
       if(res.statusCode === '200' || '201'){
-        createUser()
+        alert('Success')
       }
     }
   }
