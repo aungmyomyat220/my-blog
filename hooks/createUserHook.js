@@ -6,8 +6,8 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 export const createUserHook = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (user) => {
-      return await axios.post(`${API_BASE_URL}/users`, user,{
+    async () => {
+      return await axios.get(`${API_BASE_URL}/createUsers`,{
         headers: {
           "Access-Control-Allow-Origin": true,
           "API_KEY" : apiKey
@@ -38,7 +38,6 @@ export const checkVerificationCode = () => {
 export const checkDuplicateUser = () => {
   return useMutation(
     async (email) => {
-      console.log(email)
       try {
         const response = await fetch(`${API_BASE_URL}/checkDuplicateUser`, {
           method: "POST",

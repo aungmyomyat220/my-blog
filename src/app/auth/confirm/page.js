@@ -1,12 +1,13 @@
 'use client'
 import React, { useState, useRef, useEffect } from 'react'
-import { checkVerificationCode } from '../../../../hooks/createUserHook'
+import { checkVerificationCode, createUserHook } from '../../../../hooks/createUserHook'
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 
 const Page = () => {
   const router = useRouter();
   const { mutateAsync: checkCode, isLoading, isError } = checkVerificationCode();
+  const { mutateAsync: createUser, creatingUser } = createUserHook();
   const [inputs, setInputs] = useState(['', '', '', '', '', '']);
   const [email, setEmail] = useState('');
   const inputRefs = useRef([]);
@@ -23,6 +24,10 @@ const Page = () => {
     })
     if (verifyCode !== ""){
       const res = checkCode(verifyCode)
+      console.log("Response",res.statusCode)
+      if(res.statusCode === '200' || '201'){
+        createUser()
+      }
     }
   }
 

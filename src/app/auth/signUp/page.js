@@ -100,7 +100,6 @@ const Page = ({ onchange }) => {
 
     try {
       const response = await checkDuplicate(user.userEmail);
-      console.log(response.statusCode)
       if (response.statusCode === '409') {
         await Swal.fire({
           icon: "error",
