@@ -23,9 +23,9 @@ const Page = () => {
       verifyCode += n.toString()
     })
     if (verifyCode !== ""){
-      const res = await checkCode(verifyCode)
-      console.log("Response",res.json())
-      if(res.statusCode === '200' || '201'){
+      const res = await checkCode(verifyCode);
+      const data = await res.json();
+      if(data.statusCode === '200' || '201'){
         alert('Success')
       }
     }
