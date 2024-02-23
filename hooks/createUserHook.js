@@ -9,6 +9,7 @@ export const createUserHook = () => {
     async () => {
       return await axios.get(`${API_BASE_URL}/createUsers`,{
         headers: {
+          'Content-Type': 'application/json',
           "Access-Control-Allow-Origin": true,
           "API_KEY" : apiKey
         }
@@ -38,7 +39,6 @@ export const checkVerificationCode = () => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-
         return await response.json();
       }
   );
