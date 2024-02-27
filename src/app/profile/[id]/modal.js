@@ -3,35 +3,25 @@ import Image from "next/image";
 import { updateUserHook } from '../../../../hooks/updateUserHook'
 const Modal = ({userData}) => {
   const [image, setImage] = useState("");
-  const [company, setCompany] = useState(userData.userBio.companyName);
-  const [language, setLanguage] = useState("");
-  const [exp, setExp] = useState("");
   const fileInputRef = useRef(null);
   const { mutateAsync: updateUserBio } = updateUserHook()
-  const [user, setUser] = useState({
-    userName: userData.userName,
-    userEmail: userData.userEmail,
-    password: userData.password,
-    followers: [
-      {
-        followerId: userData.followers.followerId,
-      },
-    ],
-    image: image,
-    userBio: {
-      companyName: company,
-      mainLanguage: userData.userBio.mainLanguage,
-      experience: userData.userBio.experience,
-    },
-  });
+  const [email,setEmail] = useState(userData.userEmail)
+  const [userName,setUserName] = useState(userData.userName)
+  const [userBio, setUserBio] = useState({
+    companyName: userData.userBio.companyName,
+    mainLanguage: userData.userBio.mainLanguage,
+    experience: userData.userBio.experience
+  })
 
   const handleInputChange = (e) => {
     const { value, name } = e.target;
-    setUser((prevUser) => ({
+    setUserBio((prevUser) => ({
       ...prevUser,
       [name]: value,
     }));
   };
+
+  console.log(userBio)
 
   const convertToBase64 = (e) => {
     let reader = new FileReader();
@@ -113,14 +103,14 @@ const Modal = ({userData}) => {
           <div className={'grid grid-cols-6 justify-center items-center mt-8'}>
             <span className={'col-span px-5 text-right'}>UserName</span>
             <span className={'col-span-5 text-left px-10'}>
-              <input type="text" name='userName' onChange={handleInputChange}  value={user.userName} className={'outline outline-0 border border-black px-3 py-1 rounded-md w-full'}/>
+              <input type="text" name='userName' value={userName} onChange={(e)=>{setUserName(e.target.value)}} className={'outline outline-0 border border-black px-3 py-1 rounded-md w-full'}/>
             </span>
           </div>
 
           <div className={'grid grid-cols-6 justify-center items-center mt-5'}>
             <span className={'col-span px-5 text-right'}>Email</span>
             <span className={'col-span-5 text-left px-10'}>
-              <input type="email" disabled={true} value={user.userEmail}
+              <input type="email" disabled={true} value={email} onChange={(e)=>{setUserName(e.target.value)}}
                      className={'outline outline-0 border border-black px-3 py-1 rounded-md w-full'}/>
             </span>
           </div>
@@ -128,7 +118,7 @@ const Modal = ({userData}) => {
           <div className={'grid grid-cols-6 justify-center items-center mt-5'}>
             <span className={'col-span px-5 text-right'}>Company</span>
             <span className={'col-span-5 text-left px-10'}>
-              <input type="text" name='companyName' value={company} onChange={handleInputChange}
+              <input type="text" name='companyName' value={userBio.companyName} onChange={handleInputChange}
                      className={'outline outline-0 border border-black px-3 py-1 rounded-md w-full'}/>
             </span>
           </div>
@@ -136,7 +126,7 @@ const Modal = ({userData}) => {
           <div className={'grid grid-cols-6 justify-center items-center mt-5'}>
             <span className={'col-span px-5 text-right'}>Language</span>
             <span className={'col-span-5 text-left px-10'}>
-                <input type="text" name='mainLanguage' value={user.userBio.mainLanguage} onChange={handleInputChange}
+                <input type="text" name='mainLanguage' value={userBio.mainLanguage} onChange={handleInputChange}
                        className={'outline outline-0 border border-black px-3 py-1 rounded-md w-full'}/>
             </span>
           </div>
@@ -144,7 +134,7 @@ const Modal = ({userData}) => {
           <div className={'grid grid-cols-6 justify-center items-center mt-5'}>
             <span className={'col-span px-5 text-right'}>Experience</span>
             <span className={'col-span-5 text-left px-10'}>
-              <input type="text" name='experience' value={user.userBio.experience} onChange={handleInputChange}
+              <input type="text" name='experience' value={userBio.experience} onChange={handleInputChange}
                      className={'outline outline-0 border border-black px-3 py-1 rounded-md w-full'}/>
             </span>
           </div>
