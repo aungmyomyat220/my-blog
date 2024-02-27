@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 import { useParams, useRouter } from "next/navigation";
 import { getAllUsersHook } from "../../../../hooks/getAllUsersHook";
 import Image from "next/image";
 import {getModifiedUsersHook} from "../../../../hooks/getModifiedUserHook";
 import {updateUserHook} from "../../../../hooks/updateUserHook";
+import Modal from './modal'
 
 const Sidebar = () => {
   const { id } = useParams();
@@ -79,10 +80,10 @@ const Sidebar = () => {
         }
 
         {confirmUser && confirmUser._id === user._id ? (
-          ''
+          <Modal userData={user}></Modal>
         ) : (
           <>
-          {/* Follow Button and Mail */}
+            {/* Follow Button and Mail */}
             <div className="flex mt-5">
               <span className="mr-3" onClick={handleFollow}>
                 <div className="tooltip-container">
