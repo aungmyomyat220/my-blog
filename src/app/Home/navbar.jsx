@@ -5,6 +5,18 @@ import { useState ,useEffect} from "react";
 import Image from "next/image";
 import Swal from "sweetalert2";
 import Link from "next/link";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
 
 const Navbar = ({navFlag,handleChange}) => {
   const [showProfile, setShowProfile] = useState(false);
@@ -57,19 +69,8 @@ const Navbar = ({navFlag,handleChange}) => {
   };
 
   const logout = () =>{
-    Swal.fire({
-      text: "Do you want to Logout",
-      icon : "question",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#888e91",
-      confirmButtonText: "Logout"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        router.push('/auth/signIn')
-        sessionStorage.clear()
-      }
-    });
+    sessionStorage.clear()
+    router.push('/auth/signIn')
   }
  
   return (
@@ -153,9 +154,24 @@ const Navbar = ({navFlag,handleChange}) => {
                       View Profile
                     </a>
                   </li>
-                  <li onClick={logout}>
+                  <li>
                     <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                      Logout
+                      <AlertDialog>
+                        <AlertDialogTrigger>Logout</AlertDialogTrigger>
+                        <AlertDialogContent className={'w-96'}>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Do you want to logout?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Are you sure want to logout?
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={logout}>Logout</AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+
                     </a>
                   </li>
                 </ul>

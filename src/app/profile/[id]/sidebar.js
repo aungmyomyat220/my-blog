@@ -4,7 +4,27 @@ import { getAllUsersHook } from "../../../../hooks/getAllUsersHook";
 import Image from "next/image";
 import {getModifiedUsersHook} from "../../../../hooks/getModifiedUserHook";
 import {updateUserHook} from "../../../../hooks/updateUserHook";
-import Modal from './modal'
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 const Sidebar = () => {
   const { id } = useParams();
@@ -80,11 +100,71 @@ const Sidebar = () => {
         }
 
         {confirmUser && confirmUser._id === user._id ? (
-          <Modal userData={user}></Modal>
-        ) : (
-          <>
-            {/* Follow Button and Mail */}
             <div className="flex mt-5">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="outline" className={'border border-black'}>Edit Profile</Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Edit profile</DialogTitle>
+                    <DialogDescription>
+                      Make changes to your profile here. Click save when you're done.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="name" className="text-right">
+                        Name
+                      </Label>
+                      <Input id="name" placeholder={'Enter your name'} value="Aung Myo Myat" className="col-span-3 border border-black"/>
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="username" className="text-right">
+                        Email
+                      </Label>
+                      <Input type='email' id="email" disabled={true} placeholder={'Enter your email'} value="aungmyomyat874@gmail.com" className="col-span-3 border border-black"/>
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="username" className="text-right">
+                        Language
+                      </Label>
+                      <Select>
+                        <SelectTrigger className="w-[280px] border border-black">
+                          <SelectValue placeholder="Select Language" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectLabel>Frontend</SelectLabel>
+                            <SelectItem value="react">React</SelectItem>
+                            <SelectItem value="next">NextJS</SelectItem>
+                            <SelectItem value="angular">Angular</SelectItem>
+                            <SelectItem value="vue">VueJS</SelectItem>
+
+                            <SelectLabel>Backend</SelectLabel>
+                            <SelectItem value="est">Java</SelectItem>
+                            <SelectItem value="est">C++</SelectItem>
+                            <SelectItem value="est">C#</SelectItem>
+                            <SelectItem value="est">Ruby</SelectItem>
+                            <SelectItem value="est">Go</SelectItem>
+                            <SelectItem value="est">Python</SelectItem>
+                            <SelectItem value="est">NodeJS</SelectItem>
+                            <SelectItem value="est">PHP</SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    <Button type="submit">Save changes</Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+            </div>
+        ) : (
+            <>
+              {/* Follow Button and Mail */}
+              <div className="flex mt-5">
               <span className="mr-3" onClick={handleFollow}>
                 <div className="tooltip-container">
                   <span className="tooltip">{follower.length}</span>
