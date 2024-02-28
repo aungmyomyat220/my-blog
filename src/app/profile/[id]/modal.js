@@ -1,27 +1,32 @@
-import React, { useEffect, useRef, useState } from 'react'
-import Image from "next/image";
-import { updateUserHook } from '../../../../hooks/updateUserHook'
-const Modal = ({userData}) => {
-  const [image, setImage] = useState("");
-  const fileInputRef = useRef(null);
-  const { mutateAsync: updateUserBio } = updateUserHook()
-  const [email,setEmail] = useState(userData.userEmail)
-  const [userName,setUserName] = useState(userData.userName)
-  const [userBio, setUserBio] = useState({
-    companyName: userData.userBio.companyName,
-    mainLanguage: userData.userBio.mainLanguage,
-    experience: userData.userBio.experience
-  })
+import React, { useState } from 'react'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select'
+import Image from 'next/image'
 
-  const handleInputChange = (e) => {
-    const { value, name } = e.target;
-    setUserBio((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
+const Modal = ({user}) => {
+  const [image, setImage] = useState(user.image);
+  const handleImageClick = () => {
+    document.getElementById("fileInput").click();
   };
-
-  console.log(userBio)
 
   const convertToBase64 = (e) => {
     let reader = new FileReader();
@@ -34,120 +39,118 @@ const Modal = ({userData}) => {
     };
   };
 
-  const handleImageClick = () => {
-    document.getElementById("fileInput").click();
-  };
-
-  const updateUser = () => {
-
-  }
-
   return (
-    <div className={'flex justify-start ml-5 mt-5'}>
-      <button className={'rounded-lg px-3 py-2 bg-blue-500 text-white hover:bg-blue-600'}
-              onClick={() => document.getElementById('my_modal_3').showModal()}>Edit Profile
-      </button>
-      <dialog id="my_modal_3" className="modal">
-        <div className="modal-box">
-          <form method="dialog">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={()=>{setImage("")}}>✕</button>
-          </form>
-          <h3 className="font-bold text-2xl">Edit Your Profile</h3>
-          <p className="py-4">Make changes to your profile here. Click save when you're done.</p>
-
-          <div className={'justify-center items-center mt-3 ml-5'}>
-            <div className="mb-3">
-              <label className="block text-gray-700 font-medium mb-1">
-                Profile Picture
-              </label>
-              <div>
-                <input
-                  accept="image/jpeg, image/png"
-                  type="file"
-                  id="fileInput"
-                  onChange={convertToBase64}
-                  style={{ display: 'none' }}
-                />
-                {image == null || image === '' ? (
-                  <Image
-                    src={userData.image}
-                    alt="ImagePicker"
-                    className="w-16 h-16 rounded-full"
-                    width={0}
-                    height={0}
-                    onClick={handleImageClick}
-                  ></Image>
-                ) : (
-                  <>
-                    <Image
-                      src={image}
-                      alt="Selected"
-                      width="300"
-                      className="w-16 h-16 rounded-full"
-                      height={0}
-                      onClick={handleImageClick}
-                    />
-                  </>
-                )}
-              </div>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline" className={'border border-black'}>Edit Profile</Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Edit profile</DialogTitle>
+          <DialogDescription>
+            Make changes to your profile here. Click save when you're done.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <div>
               <input
+                accept="image/jpeg, image/png"
                 type="file"
-                name="image"
-                accept="image/*"
-                ref={fileInputRef}
+                id="fileInput"
+                onChange={convertToBase64}
                 style={{ display: 'none' }}
               />
+                  <Image
+                    src={image}
+                    alt="Selected"
+                    width="300"
+                    className="w-16 h-16 ml-10 mb-3 rounded-full"
+                    height={0}
+                    onClick={handleImageClick}
+                  />
             </div>
           </div>
-
-          <div className={'grid grid-cols-6 justify-center items-center mt-8'}>
-            <span className={'col-span px-5 text-right'}>UserName</span>
-            <span className={'col-span-5 text-left px-10'}>
-              <input type="text" name='userName' value={userName} onChange={(e)=>{setUserName(e.target.value)}} className={'outline outline-0 border border-black px-3 py-1 rounded-md w-full'}/>
-            </span>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name" className="text-right">
+              Name
+            </Label>
+            <Input id="name" placeholder={'Enter your name'} value="Aung Myo Myat"
+                   className="col-span-3 border border-black"/>
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="email" className="text-right">
+              Email
+            </Label>
+            <Input type="email" id="email" disabled={true} placeholder={'Enter your email'}
+                   value="aungmyomyat874@gmail.com" className="col-span-3 border border-black"/>
           </div>
 
-          <div className={'grid grid-cols-6 justify-center items-center mt-5'}>
-            <span className={'col-span px-5 text-right'}>Email</span>
-            <span className={'col-span-5 text-left px-10'}>
-              <input type="email" disabled={true} value={email} onChange={(e)=>{setUserName(e.target.value)}}
-                     className={'outline outline-0 border border-black px-3 py-1 rounded-md w-full'}/>
-            </span>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="company" className="text-right">
+              Company
+            </Label>
+            <Input type='text' id="company" placeholder={'Enter your company'}
+                   value="GIC Myanmar" className="col-span-3 border border-black"/>
           </div>
 
-          <div className={'grid grid-cols-6 justify-center items-center mt-5'}>
-            <span className={'col-span px-5 text-right'}>Company</span>
-            <span className={'col-span-5 text-left px-10'}>
-              <input type="text" name='companyName' value={userBio.companyName} onChange={handleInputChange}
-                     className={'outline outline-0 border border-black px-3 py-1 rounded-md w-full'}/>
-            </span>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="username" className="text-right">
+              Language
+            </Label>
+            <Select>
+              <SelectTrigger className="w-[277px] border border-black">
+                <SelectValue placeholder="Select Language"/>
+              </SelectTrigger>
+              <SelectContent className={'cursor-pointer'}>
+                <SelectGroup>
+                  <SelectLabel>Frontend</SelectLabel>
+                  <SelectItem value="react" className={'cursor-pointer'}>React</SelectItem>
+                  <SelectItem value="next" className={'cursor-pointer'}>NextJS</SelectItem>
+                  <SelectItem value="angular" className={'cursor-pointer'}>Angular</SelectItem>
+                  <SelectItem value="vue" className={'cursor-pointer'}>VueJS</SelectItem>
+
+                  <SelectLabel>Backend</SelectLabel>
+                  <SelectItem value="java" className={'cursor-pointer'}>Java</SelectItem>
+                  <SelectItem value="c++" className={'cursor-pointer'}>C++</SelectItem>
+                  <SelectItem value="c#" className={'cursor-pointer'}>C#</SelectItem>
+                  <SelectItem value="ruby" className={'cursor-pointer'}>Ruby</SelectItem>
+                  <SelectItem value="go" className={'cursor-pointer'}>Go</SelectItem>
+                  <SelectItem value="python" className={'cursor-pointer'}>Python</SelectItem>
+                  <SelectItem value="node" className={'cursor-pointer'}>NodeJS</SelectItem>
+                  <SelectItem value="php" className={'cursor-pointer'}>PHP</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
 
-          <div className={'grid grid-cols-6 justify-center items-center mt-5'}>
-            <span className={'col-span px-5 text-right'}>Language</span>
-            <span className={'col-span-5 text-left px-10'}>
-                <input type="text" name='mainLanguage' value={userBio.mainLanguage} onChange={handleInputChange}
-                       className={'outline outline-0 border border-black px-3 py-1 rounded-md w-full'}/>
-            </span>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="username" className="text-right">
+              Experience
+            </Label>
+            <Select>
+              <SelectTrigger className="w-[277px] border border-black">
+                <SelectValue placeholder="Select your experience"/>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Experience</SelectLabel>
+                  <SelectItem value="one" className={'cursor-pointer'}>1 year</SelectItem>
+                  <SelectItem value="two" className={'cursor-pointer'}>2 years</SelectItem>
+                  <SelectItem value="3to5" className={'cursor-pointer'}>3~5 years</SelectItem>
+                  <SelectItem value="5to10" className={'cursor-pointer'}>5~10 years</SelectItem>
+                  <SelectItem value="over10" className={'cursor-pointer'}>Over 10 years</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
 
-          <div className={'grid grid-cols-6 justify-center items-center mt-5'}>
-            <span className={'col-span px-5 text-right'}>Experience</span>
-            <span className={'col-span-5 text-left px-10'}>
-              <input type="text" name='experience' value={userBio.experience} onChange={handleInputChange}
-                     className={'outline outline-0 border border-black px-3 py-1 rounded-md w-full'}/>
-            </span>
-          </div>
-
-          <div className={'grid grid-cols-6 justify-center items-center mt-5'}>
-            <span className={'col-span px-5'}></span>
-            <span className={'col-span-5 text-end px-10'}>
-              <button className={'rounded-md bg-black py-2 px-3 text-white'} onClick={updateUser}>Saves Changes</button>
-            </span>
-          </div>
         </div>
-      </dialog>
-    </div>
+        <DialogFooter>
+          <Button type="submit">Save changes</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }
 
