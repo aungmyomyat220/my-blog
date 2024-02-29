@@ -137,9 +137,9 @@ const Modal = ({user}) => {
                   <SelectLabel>Experience</SelectLabel>
                   <SelectItem value="one" className={'cursor-pointer'}>1 year</SelectItem>
                   <SelectItem value="two" className={'cursor-pointer'}>2 years</SelectItem>
-                  <SelectItem value="3to5" className={'cursor-pointer'}>3~5 years</SelectItem>
-                  <SelectItem value="5to10" className={'cursor-pointer'}>5~10 years</SelectItem>
-                  <SelectItem value="over10" className={'cursor-pointer'}>Over 10 years</SelectItem>
+                  <SelectItem value="three" className={'cursor-pointer'}>3 years</SelectItem>
+                  <SelectItem value="five" className={'cursor-pointer'}>5 years</SelectItem>
+                  <SelectItem value="ten" className={'cursor-pointer'}>10 years</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
