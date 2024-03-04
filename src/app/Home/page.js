@@ -19,8 +19,12 @@ export default function Home() {
       setSearchKey(key)
   }
 
+  const handleLoad = () => {
+
+  }
+
   return (
-    <div>
+    <div onLoad={handleLoad}>
       <div className="flex flex-col w-full items-center h-screen">
         <NavBar handleChange={handleChange}></NavBar>
         <div className="grid grid-cols-1 sm:grid-cols-6 w-full h-full px-5 md:px-48">
