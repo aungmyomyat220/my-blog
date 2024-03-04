@@ -38,7 +38,7 @@ export const checkVerificationCode = () => {
         });
 
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          return { message: "Verification code does not match", statusCode: 400 }
         }
         return await response.json();
       }
