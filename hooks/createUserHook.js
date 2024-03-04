@@ -28,6 +28,7 @@ export const checkVerificationCode = () => {
       async (verifyCode) => {
         const response = await fetch(`${API_BASE_URL}/checkVerificationCode`, {
           method: 'POST',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': true,

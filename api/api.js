@@ -111,6 +111,7 @@ export const getUser = async () => {
 export const verifyEmail = async (user) => {
     try {
       const response = await axios.post(`${API_BASE_URL}/verify_email`,user,{
+        withCredentials: true,
         headers : {
           'API_KEY' : apiKey,
           "Content-Type": "application/json",

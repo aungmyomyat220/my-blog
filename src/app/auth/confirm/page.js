@@ -24,9 +24,23 @@ const Page = () => {
     })
     if (verifyCode !== ""){
       const res = await checkCode(verifyCode);
-      const data = await res.json();
-      if(data.statusCode === '200' || '201'){
-        alert('Success')
+      console.log(res)
+      if(res.statusCode === 201){
+        await Swal.fire({
+          icon: "success",
+          title: "Account created Successfully",
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        router.push("/auth/signIn");
+      }else if(res.statusCode === 400){
+        await Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Verification Code does not match",
+          showConfirmButton: true,
+          timer: null,
+        });
       }
     }
   }
