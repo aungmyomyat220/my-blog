@@ -40,6 +40,15 @@ export const Login = async (checkUser) => {
   }
 };
 
+export const access = async () => {
+  try{
+    const response = await axios.get(`${API_BASE_URL}`)
+    console.log(response)
+  }catch (e) {
+    console.log(e)
+  }
+}
+
 export const checkUserExist = async (email) => {
   try {
     const response = await fetch(`${API_BASE_URL}/checkuser`, {

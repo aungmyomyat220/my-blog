@@ -24,6 +24,16 @@ import Image from 'next/image'
 
 const Modal = ({user}) => {
   const [image, setImage] = useState(user.image);
+  const [userData, setUserData] = useState(user)
+
+  const handleInputChange = (e) => {
+    const { value, name } = e.target;
+    setUserData((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
+  };
+
   const handleImageClick = () => {
     document.getElementById("fileInput").click();
   };
@@ -72,23 +82,23 @@ const Modal = ({user}) => {
             <Label htmlFor="name" className="text-right">
               Name
             </Label>
-            <Input id="name" placeholder={'Enter your name'} value="Aung Myo Myat"
-                   className="col-span-3 border border-black"/>
+            <Input id="name" placeholder={'Enter your name'} value={userData.userName} name='userName'
+                   onChange={handleInputChange} className="col-span-3 border border-black"/>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="email" className="text-right">
               Email
             </Label>
             <Input type="email" id="email" disabled={true} placeholder={'Enter your email'}
-                   value="aungmyomyat874@gmail.com" className="col-span-3 border border-black"/>
+                   onChange={handleInputChange} value={userData.userEmail} className="col-span-3 border border-black"/>
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="company" className="text-right">
               Company
             </Label>
-            <Input type='text' id="company" placeholder={'Enter your company'}
-                   value="GIC Myanmar" className="col-span-3 border border-black"/>
+            <Input type='text' id="company" placeholder={'Enter your company'} name='companyName'
+                   onChange={handleInputChange} value={userData.userBio.companyName} className="col-span-3 border border-black"/>
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">

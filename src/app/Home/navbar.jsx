@@ -68,7 +68,7 @@ const Navbar = ({navFlag,handleChange}) => {
     setDropDown(!dropDown);
   };
 
-  const logout = () =>{
+  const logout = () =>{ 
     sessionStorage.clear()
     router.push('/auth/signIn')
   }

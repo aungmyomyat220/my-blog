@@ -3,6 +3,7 @@ import NavBar from "./navbar";
 import { useState } from "react";
 import ForYou from "./foryou";
 import Suggestion from "./suggestion";
+import {access} from '../../../api/api'
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("foryou");
@@ -20,7 +21,7 @@ export default function Home() {
   }
 
   const handleLoad = () => {
-
+      access()
   }
 
   return (
